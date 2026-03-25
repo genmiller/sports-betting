@@ -2,11 +2,9 @@
   "version": 2,
   "functions": {
     "api/scores.js": {
-      "runtime": "nodejs20.x",
       "maxDuration": 10
     },
     "api/highschool.js": {
-      "runtime": "nodejs20.x",
       "maxDuration": 15
     }
   },
