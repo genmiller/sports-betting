@@ -1,30 +1,3 @@
 {
-  "version": 2,
-  "functions": {
-    "api/scores.js": {
-      "maxDuration": 10
-    },
-    "api/highschool.js": {
-      "maxDuration": 15
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" }
-      ]
-    }
-  ]
+  "version": 2
 }
