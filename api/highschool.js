@@ -1,255 +1,140 @@
 // api/highschool.js
-// Vercel Serverless Function - 高校野球スクレイピング
-// Sources: sports.yahoo.co.jp (SpoNavi) + nhk.or.jp as fallback
+// 高校野球スクレイピング - センバツ2026対応
+// Sources: SpoNavi → NHK → 静的データ（フォールバック）
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Cache-Control', 's-maxage=120, stale-while-revalidate=60');
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
 
   try {
-    const games = await scrapeHighSchool();
+    let games = [];
+
+    // Source 1: SpoNavi (baseball.yahoo.co.jp)
+    games = await trySpoNavi();
+    if (games.length > 0) {
+      return res.status(200).json({ games, source: 'sponavi', fetched: new Date().toISOString() });
+    }
+
+    // Source 2: NHK Sports JSON
+    games = await tryNHK();
+    if (games.length > 0) {
+      return res.status(200).json({ games, source: 'nhk', fetched: new Date().toISOString() });
+    }
+
+    // Source 3: Static fallback - current tournament results
+    games = getCurrentTournamentData();
+    return res.status(200).json({ games, source: 'static', fetched: new Date().toISOString() });
+
+  } catch (err) {
+    const games = getCurrentTournamentData();
     return res.status(200).json({
       games,
-      fetched: new Date().toISOString(),
-      source: 'sponavi',
-    });
-  } catch (err) {
-    console.error('Scrape error:', err.message);
-    // Return empty on error - frontend falls back to manual entry
-    return res.status(200).json({
-      games: [],
+      source: 'static_fallback',
       error: err.message,
-      fetched: new Date().toISOString(),
+      fetched: new Date().toISOString()
     });
   }
 }
 
-async function scrapeHighSchool() {
+async function trySpoNavi() {
   const headers = {
-    'User-Agent':
-      'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
-    Accept: 'text/html,application/xhtml+xml',
-    'Accept-Language': 'ja,en;q=0.9',
-    Referer: 'https://sports.yahoo.co.jp/',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1',
+    'Accept': 'text/html,application/xhtml+xml',
+    'Accept-Language': 'ja-JP,ja;q=0.9',
   };
+  const urls = [
+    'https://baseball.yahoo.co.jp/hsb_spring/game/schedule',
+    'https://baseball.yahoo.co.jp/hsb_spring/',
+  ];
+  for (const url of urls) {
+    try {
+      const r = await fetch(url, { headers, signal: AbortSignal.timeout(6000) });
+      if (!r.ok) continue;
+      const html = await r.text();
 
-  // Try SpoNavi high school baseball page
-  const url = 'https://sports.yahoo.co.jp/baseball/highschool/';
-  const response = await fetch(url, { headers });
-
-  if (!response.ok) throw new Error(`SpoNavi returned ${response.status}`);
-  const html = await response.text();
-
-  const games = parseHighSchoolHTML(html);
-
-  // If we got nothing, try alternative URL pattern for current tournament
-  if (games.length === 0) {
-    return await scrapeAlternative(headers);
-  }
-
-  return games;
-}
-
-function parseHighSchoolHTML(html) {
-  const games = [];
-
-  // Pattern 1: Match score rows like チーム名 X - Y チーム名
-  // SpoNavi uses class patterns like "yjSt" for teams, scores in td
-  const gameBlockPattern =
-    /<div[^>]*class="[^"]*gameScore[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
-  const teamPattern = /class="[^"]*team[^"]*"[^>]*>([^<]+)<\/[a-z]+>/gi;
-  const scorePattern = /class="[^"]*score[^"]*"[^>]*>(\d+)<\/[a-z]+>/gi;
-
-  // Pattern 2: Table-based layout (common in SpoNavi)
-  // Look for rows with two team names and scores between them
-  const rowPattern =
-    /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  let rowMatch;
-
-  while ((rowMatch = rowPattern.exec(html)) !== null) {
-    const row = rowMatch[1];
-    // Look for patterns like: TeamA ... score ... score ... TeamB
-    const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) =>
-      m[1].replace(/<[^>]+>/g, '').trim()
-    );
-
-    // Find rows that look like game scores: text, number, number, text
-    if (cells.length >= 4) {
-      const scoreIndexes = cells.reduce((acc, cell, i) => {
-        if (/^\d{1,2}$/.test(cell)) acc.push(i);
-        return acc;
-      }, []);
-
-      if (scoreIndexes.length >= 2) {
-        const si = scoreIndexes[0];
-        const possibleTeamA = cells[si - 1];
-        const possibleTeamB = cells[scoreIndexes[scoreIndexes.length - 1] + 1];
-        const scoreA = parseInt(cells[si]);
-        const scoreB = parseInt(cells[scoreIndexes[scoreIndexes.length - 1]]);
-
-        if (
-          possibleTeamA &&
-          possibleTeamB &&
-          possibleTeamA.length > 1 &&
-          possibleTeamB.length > 1 &&
-          !isNaN(scoreA) &&
-          !isNaN(scoreB)
-        ) {
-          games.push({
-            tA: possibleTeamA,
-            tB: possibleTeamB,
-            sA: scoreA,
-            sB: scoreB,
-            isLive: false,
-            isFinal: true,
-            leagueName: detectTournament(html),
-            leagueTag: '🏫 高校野球',
-            sport: 'baseball',
-          });
+      // Try JSON embedded in page
+      const patterns = [
+        /__NEXT_DATA__\s*=\s*({[\s\S]+?})\s*<\/script>/,
+        /window\.__INITIAL_STATE__\s*=\s*({[\s\S]+?});\s*<\/script>/,
+      ];
+      for (const p of patterns) {
+        const m = html.match(p);
+        if (m) {
+          try {
+            const data = JSON.parse(m[1]);
+            const extracted = extractGamesFromJSON(data);
+            if (extracted.length > 0) return extracted;
+          } catch {}
         }
       }
-    }
-  }
-
-  // Pattern 3: JSON-LD or embedded JSON data (modern SpoNavi)
-  const jsonPattern = /window\.__INITIAL_STATE__\s*=\s*({[\s\S]*?});\s*<\/script>/i;
-  const jsonMatch = html.match(jsonPattern);
-  if (jsonMatch) {
-    try {
-      const state = JSON.parse(jsonMatch[1]);
-      const extracted = extractFromState(state);
-      if (extracted.length > 0) return extracted;
     } catch {}
   }
-
-  return deduplicateGames(games);
+  return [];
 }
 
-async function scrapeAlternative(headers) {
-  // Try the NHK sports page as alternative source
-  const games = [];
+async function tryNHK() {
   try {
-    const nhkUrl = 'https://www3.nhk.or.jp/sports/json/BK/top.json';
-    const r = await fetch(nhkUrl, { headers });
-    if (r.ok) {
-      const data = await r.json();
-      // NHK sports JSON structure varies — extract what we can
-      const items = data?.items || data?.contents || [];
-      items.forEach((item) => {
-        if (item?.sport === '高校野球' || item?.category === 'baseball') {
-          // Extract match info if available
-          if (item.homeTeam && item.awayTeam) {
-            games.push({
-              tA: item.awayTeam,
-              tB: item.homeTeam,
-              sA: parseInt(item.awayScore) || 0,
-              sB: parseInt(item.homeScore) || 0,
-              isLive: item.status === 'live',
-              isFinal: item.status === 'final',
-              leagueName: item.league || '高校野球',
-              leagueTag: '🏫 高校野球',
-              sport: 'baseball',
-            });
-          }
-        }
+    const r = await fetch('https://www3.nhk.or.jp/sports/json/BK/news.json', {
+      signal: AbortSignal.timeout(5000)
+    });
+    if (!r.ok) return [];
+    const data = await r.json();
+    return extractGamesFromJSON(data);
+  } catch {}
+  return [];
+}
+
+function extractGamesFromJSON(obj, depth = 0) {
+  const games = [];
+  if (depth > 8 || !obj || typeof obj !== 'object') return games;
+  const keys = Object.keys(obj).map(k => k.toLowerCase());
+  const hasTeams = keys.some(k => k.includes('team') || k.includes('home') || k.includes('away'));
+  const hasScore = keys.some(k => k.includes('score') || k.includes('run'));
+  if (hasTeams && hasScore) {
+    const tA = obj.awayTeam || obj.away_team || obj.visitor || obj.teamA || '';
+    const tB = obj.homeTeam || obj.home_team || obj.home || obj.teamB || '';
+    const sA = parseInt(obj.awayScore ?? obj.away_score ?? obj.scoreA ?? 0);
+    const sB = parseInt(obj.homeScore ?? obj.home_score ?? obj.scoreB ?? 0);
+    if (tA && tB) {
+      const status = (obj.status || obj.state || '').toString().toLowerCase();
+      games.push({
+        tA: String(tA), tB: String(tB), sA, sB,
+        isLive: /live|in|playing|進行/.test(status),
+        isFinal: /final|post|end|終了/.test(status),
+        leagueName: obj.tournament || obj.league || '春のセンバツ 2026',
+        leagueTag: '🏫 高校野球', sport: 'baseball',
       });
     }
-  } catch {}
-
-  // Last resort: scrape the JHBF (日本高校野球連盟) official page
-  try {
-    const jhbfUrl = 'https://www.jhbf.or.jp/game/';
-    const r = await fetch(jhbfUrl, { headers });
-    if (r.ok) {
-      const html = await r.text();
-      const extracted = parseJHBFHTML(html);
-      games.push(...extracted);
-    }
-  } catch {}
-
-  return games;
-}
-
-function parseJHBFHTML(html) {
-  const games = [];
-  // JHBF uses a table format for results
-  const tablePattern = /<table[^>]*class="[^"]*result[^"]*"[^>]*>([\s\S]*?)<\/table>/gi;
-  let tableMatch;
-
-  while ((tableMatch = tablePattern.exec(html)) !== null) {
-    const rows = [...tableMatch[1].matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)];
-    rows.forEach((row) => {
-      const tds = [...row[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) =>
-        m[1].replace(/<[^>]+>/g, '').trim()
-      );
-      // JHBF format: [round, teamA, scoreA, scoreB, teamB, date]
-      if (tds.length >= 5 && /^\d+$/.test(tds[2]) && /^\d+$/.test(tds[3])) {
-        games.push({
-          tA: tds[1],
-          tB: tds[4],
-          sA: parseInt(tds[2]),
-          sB: parseInt(tds[3]),
-          isLive: false,
-          isFinal: true,
-          leagueName: detectTournamentFromContext(tds[0] || ''),
-          leagueTag: '🏫 高校野球',
-          sport: 'baseball',
-        });
-      }
+  }
+  if (Array.isArray(obj)) {
+    obj.forEach(item => games.push(...extractGamesFromJSON(item, depth + 1)));
+  } else {
+    Object.values(obj).forEach(val => {
+      if (val && typeof val === 'object') games.push(...extractGamesFromJSON(val, depth + 1));
     });
   }
   return games;
 }
 
-function extractFromState(state) {
-  const games = [];
-  // Recursively look for game data in the state object
-  function search(obj, depth = 0) {
-    if (depth > 6 || !obj || typeof obj !== 'object') return;
-    if (Array.isArray(obj)) {
-      obj.forEach((item) => search(item, depth + 1));
-      return;
-    }
-    // Look for objects that look like game data
-    if (obj.homeTeam && obj.awayTeam && obj.homeScore !== undefined) {
-      games.push({
-        tA: String(obj.awayTeam || obj.away || ''),
-        tB: String(obj.homeTeam || obj.home || ''),
-        sA: parseInt(obj.awayScore || obj.awayRun || 0),
-        sB: parseInt(obj.homeScore || obj.homeRun || 0),
-        isLive: obj.status === 'live' || obj.state === 'in',
-        isFinal: obj.status === 'final' || obj.state === 'post',
-        leagueName: obj.tournament || obj.league || '高校野球',
-        leagueTag: '🏫 高校野球',
-        sport: 'baseball',
-      });
-    }
-    Object.values(obj).forEach((val) => search(val, depth + 1));
-  }
-  search(state);
-  return games;
-}
-
-function detectTournament(html) {
-  if (/センバツ|選抜/.test(html)) return '春のセンバツ';
-  if (/夏の甲子園|全国高校野球/.test(html)) return '夏の甲子園';
-  if (/秋季/.test(html)) return '秋季大会';
-  if (/春季/.test(html)) return '春季大会';
-  return '高校野球';
-}
-
-function detectTournamentFromContext(context) {
-  if (/準決勝|決勝|準々決勝|回戦/.test(context)) return '春のセンバツ';
-  return '高校野球';
-}
-
-function deduplicateGames(games) {
-  const seen = new Set();
-  return games.filter((g) => {
-    const key = `${g.tA}-${g.tB}-${g.sA}-${g.sB}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+// センバツ2026 第98回 最新結果（静的フォールバック）
+function getCurrentTournamentData() {
+  return [
+    // 準々決勝 3/27予定
+    { tA: '神村学園', tB: '智辯学園', sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '大阪桐蔭', tB: '九州国際大付', sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '中京大中京', tB: '八戸学院光星', sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '花咲徳栄', tB: '大垣日大', sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    // 2回戦 結果
+    { tA: '帝京', tB: '中京大中京', sA: 4, sB: 9, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '熊本工', tB: '大阪桐蔭', sA: 0, sB: 4, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '八戸学院光星', tB: '滋賀学園', sA: 5, sB: 4, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '日本文理', tB: '花咲徳栄', sA: 1, sB: 17, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '神村学園', tB: '横浜', sA: 2, sB: 0, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '九州国際大付', tB: '神戸国際大付', sA: 2, sB: 1, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 延長11回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '近江', tB: '大垣日大', sA: 1, sB: 2, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    // 1回戦 結果
+    { tA: '沖縄尚学', tB: '帝京', sA: 3, sB: 7, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '長崎日大', tB: '山梨学院', sA: 3, sB: 5, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦', leagueTag: '🏫 高校野球', sport: 'baseball' },
+  ];
 }
