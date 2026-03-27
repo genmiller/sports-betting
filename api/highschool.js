@@ -102,14 +102,14 @@ function parseScheduleHTML(html) {
     }
   }
 
-  // 重複除去
+  // 重複除去、新しい試合を先頭に
   const seen = new Set();
   return games.filter(g => {
     const key = `${g.tA}-${g.tB}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  });
+  }).reverse();
 }
 
 // 静的フォールバック（SpoNaviが取れない場合）
@@ -121,32 +121,32 @@ function getStaticData() {
     { tA: '智弁学園',   tB: '花咲徳栄',     sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝 11:00', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '専大松戸',   tB: '山梨学院',     sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝 13:30', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '英明',       tB: '大阪桐蔭',     sA: 0, sB: 0, isLive: false, isFinal: false, leagueName: '春のセンバツ 2026 準々決勝 16:00', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    // ━━ 2回戦 結果 ━━
-    { tA: '帝京',         tB: '中京大中京',   sA: 4,  sB: 9,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '熊本工',       tB: '大阪桐蔭',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '崇徳',         tB: '八戸学院光星', sA: 6,  sB: 15, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '神村学園',     tB: '智弁学園',     sA: 1,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/25 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '日本文理',     tB: '花咲徳栄',     sA: 0,  sB: 17, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/25', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    // ━━ 2回戦 結果（新しい順）━━
     { tA: '大垣日大',     tB: '山梨学院',     sA: 1,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/26', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '東北',         tB: '英明',         sA: 3,  sB: 6,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/26', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '三重',         tB: '大阪桐蔭',     sA: 2,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/26', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '専大松戸',     tB: '九州国際大付', sA: 8,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/26', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    // ━━ 1回戦 結果 ━━
-    { tA: '帝京',         tB: '沖縄尚学',     sA: 4,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '阿南光',       tB: '中京大中京',   sA: 1,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '崇徳',         tB: '八戸学院光星', sA: 6,  sB: 15, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '滋賀学園',     tB: '長崎西',       sA: 5,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '横浜',         tB: '神村学園',     sA: 0,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '花巻東',       tB: '智弁学園',     sA: 0,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '東洋大姫路',   tB: '花咲徳栄',     sA: 0,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '高知農',       tB: '日本文理',     sA: 0,  sB: 5,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '北照',         tB: '専大松戸',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '神戸国際大付', tB: '九州国際大付', sA: 3,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22 延長11回', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '近江',         tB: '大垣日大',     sA: 1,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '山梨学院',     tB: '長崎日大',     sA: 5,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '神村学園',     tB: '智弁学園',     sA: 1,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/25 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '日本文理',     tB: '花咲徳栄',     sA: 0,  sB: 17, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/25', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '帝京',         tB: '中京大中京',   sA: 4,  sB: 9,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '熊本工',       tB: '大阪桐蔭',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '崇徳',         tB: '八戸学院光星', sA: 6,  sB: 15, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 2回戦 3/24 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    // ━━ 1回戦 結果（新しい順）━━
+    { tA: '熊本工',       tB: '大阪桐蔭',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '東北',         tB: '帝京長岡',     sA: 5,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/23', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '高川学園',     tB: '英明',         sA: 3,  sB: 5,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/23', leagueTag: '🏫 高校野球', sport: 'baseball' },
     { tA: '佐野日大',     tB: '三重',         sA: 0,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/23', leagueTag: '🏫 高校野球', sport: 'baseball' },
-    { tA: '熊本工',       tB: '大阪桐蔭',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/24', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '神戸国際大付', tB: '九州国際大付', sA: 3,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22 延長11回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '近江',         tB: '大垣日大',     sA: 1,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22 延長10回', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '山梨学院',     tB: '長崎日大',     sA: 5,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/22', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '東洋大姫路',   tB: '花咲徳栄',     sA: 0,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '高知農',       tB: '日本文理',     sA: 0,  sB: 5,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '北照',         tB: '専大松戸',     sA: 0,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/21', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '滋賀学園',     tB: '長崎西',       sA: 5,  sB: 4,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '横浜',         tB: '神村学園',     sA: 0,  sB: 2,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '花巻東',       tB: '智弁学園',     sA: 0,  sB: 1,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/20', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '帝京',         tB: '沖縄尚学',     sA: 4,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '阿南光',       tB: '中京大中京',   sA: 1,  sB: 3,  isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
+    { tA: '崇徳',         tB: '八戸学院光星', sA: 6,  sB: 15, isLive: false, isFinal: true, leagueName: '春のセンバツ 2026 1回戦 3/19', leagueTag: '🏫 高校野球', sport: 'baseball' },
   ];
 }
