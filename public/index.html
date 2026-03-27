@@ -1,857 +1,2131 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>スポーツベット 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --accent:#3B82F6;--accent2:#8B5CF6;--accent-glow:rgba(59,130,246,.35);
-  --live:#EF4444;--live-glow:rgba(239,68,68,.4);
-  --green:#10B981;--orange:#F59E0B;
-  --bg:#0D0F14;--bg2:#151820;--bg3:#0A0C10;
-  --card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.07);
-  --glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.10);
-  --txt:#F1F5F9;--txt2:#94A3B8;--txt3:#475569;
-  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
-  --shadow:0 4px 24px rgba(0,0,0,.5);
-  --bg-info:rgba(59,130,246,.15);--bg-success:rgba(16,185,129,.15);
-  --bg-warn:rgba(245,158,11,.15);--bg-danger:rgba(239,68,68,.15);
-  --txt-info:#60A5FA;--txt-success:#34D399;--txt-warn:#FBBF24;--txt-danger:#F87171;
-  --border-info:rgba(59,130,246,.3);--border-danger:rgba(239,68,68,.3);
-  --border-success:rgba(16,185,129,.3);
-}
-html,body{height:100%;overflow:hidden}
-body{font-family:'Inter','Hiragino Sans','Noto Sans JP',sans-serif;font-size:13px;color:var(--txt);background:var(--bg3)}
-.shell{display:flex;flex-direction:column;height:100vh;height:100dvh;background:linear-gradient(160deg,#0D0F14 0%,#0a0c18 50%,#0D0F14 100%)}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>スポーツベット 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent
+    }
 
-/* ── Topbar ── */
-.topbar{background:rgba(13,15,20,.95);border-bottom:1px solid var(--glass-border);flex-shrink:0;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.topbar-main{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:6px}
-.top-left{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
-.top-logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 12px var(--accent-glow)}
-.app-title{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(90deg,#fff,var(--txt2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px}
-.top-sub{font-size:9px;color:var(--txt3);white-space:nowrap;letter-spacing:.02em}
-.top-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--live);animation:livepulse 1.2s infinite;display:none;box-shadow:0 0 8px var(--live-glow)}
-@keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.score-badge{padding:4px 10px;border-radius:8px;background:var(--card2);font-weight:700;font-size:13px;display:none;border:1px solid var(--border2);letter-spacing:.5px;color:var(--txt)}
-.refresh-btn{font-size:15px;padding:5px 9px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--txt2);cursor:pointer;display:none;transition:all .2s}
-.refresh-btn:active{background:var(--card2);color:var(--txt);transform:rotate(120deg)}
+    :root {
+      --accent: #3B82F6;
+      --accent2: #8B5CF6;
+      --accent-glow: rgba(59, 130, 246, .35);
+      --live: #EF4444;
+      --live-glow: rgba(239, 68, 68, .4);
+      --green: #10B981;
+      --orange: #F59E0B;
+      --bg: #0D0F14;
+      --bg2: #151820;
+      --bg3: #0A0C10;
+      --card: rgba(255, 255, 255, .04);
+      --card2: rgba(255, 255, 255, .07);
+      --glass: rgba(255, 255, 255, .06);
+      --glass-border: rgba(255, 255, 255, .10);
+      --txt: #F1F5F9;
+      --txt2: #94A3B8;
+      --txt3: #475569;
+      --border: rgba(255, 255, 255, .08);
+      --border2: rgba(255, 255, 255, .14);
+      --shadow: 0 4px 24px rgba(0, 0, 0, .5);
+      --bg-info: rgba(59, 130, 246, .15);
+      --bg-success: rgba(16, 185, 129, .15);
+      --bg-warn: rgba(245, 158, 11, .15);
+      --bg-danger: rgba(239, 68, 68, .15);
+      --txt-info: #60A5FA;
+      --txt-success: #34D399;
+      --txt-warn: #FBBF24;
+      --txt-danger: #F87171;
+      --border-info: rgba(59, 130, 246, .3);
+      --border-danger: rgba(239, 68, 68, .3);
+      --border-success: rgba(16, 185, 129, .3);
+    }
 
-/* Today bar */
-.today-bar{display:flex;align-items:center;gap:5px;padding:5px 14px;border-top:1px solid var(--border);overflow-x:auto;background:rgba(0,0,0,.3);-webkit-overflow-scrolling:touch}
-.today-bar::-webkit-scrollbar{display:none}
-.today-lbl{font-size:8px;color:var(--txt3);white-space:nowrap;font-weight:700;flex-shrink:0;text-transform:uppercase;letter-spacing:.08em}
-.tg{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:6px;background:var(--card);border:1px solid var(--border);white-space:nowrap;font-size:10px;flex-shrink:0;transition:border-color .15s}
-.tg.live{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.08)}
-.tg-score{font-weight:700;padding:0 2px;color:var(--txt)}
-.tg-team{color:var(--txt3);font-size:9px}
-.spin-sm{width:9px;height:9px;border:1.5px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
+    html,
+    body {
+      height: 100%;
+      overflow: hidden
+    }
 
-/* Shell layout */
-.content{flex:1;overflow:hidden;display:flex;flex-direction:column}
-.panel{display:none;flex:1;flex-direction:column;overflow:hidden}
-.panel.active{display:flex}
-.bottom-nav{display:flex;background:rgba(13,15,20,.98);border-top:1px solid var(--glass-border);flex-shrink:0;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 7px;font-size:9px;color:var(--txt3);background:none;border:none;cursor:pointer;gap:3px;transition:color .2s;font-family:inherit;font-weight:600;letter-spacing:.02em}
-.nav-btn .icon{font-size:22px;line-height:1;transition:transform .2s}
-.nav-btn.active{color:var(--accent)}
-.nav-btn.active .icon{transform:scale(1.1)}
+    body {
+      font-family: 'Inter', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      color: var(--txt);
+      background: var(--bg3)
+    }
 
-/* Views */
-.view{display:none;flex:1;flex-direction:column;overflow:hidden}
-.view.active{display:flex}
+    .shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      background: linear-gradient(160deg, #0D0F14 0%, #0a0c18 50%, #0D0F14 100%)
+    }
 
-/* ── Sport tabs ── */
-.sport-tabs{display:flex;gap:6px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0}
-.sport-tabs::-webkit-scrollbar{display:none}
-.stab{padding:6px 15px;border-radius:20px;font-size:11px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--txt2);white-space:nowrap;flex-shrink:0;transition:all .2s;font-weight:600;letter-spacing:.02em;font-family:inherit}
-.stab:hover{border-color:var(--accent);color:var(--txt)}
-.stab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;font-weight:700;box-shadow:0 0 14px var(--accent-glow)}
+    /* ── Topbar ── */
+    .topbar {
+      background: rgba(13, 15, 20, .95);
+      border-bottom: 1px solid var(--glass-border);
+      flex-shrink: 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px)
+    }
 
-/* ── Game list ── */
-.game-list{flex:1;overflow-y:auto;padding:12px 12px 4px;-webkit-overflow-scrolling:touch;background:var(--bg3)}
-.game-list::-webkit-scrollbar{display:none}
-.game-card{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:14px 15px 12px;margin-bottom:10px;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.game-card:hover{border-color:var(--border2);background:var(--card2);transform:translateY(-1px)}
-.game-card:active{transform:translateY(0);border-color:var(--accent);background:rgba(59,130,246,.08)}
-.gc-league{font-size:9px;color:var(--txt3);margin-bottom:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:5px}
-.gc-league-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.gc-teams{display:flex;align-items:center;gap:8px}
-.gc-team{font-size:15px;font-weight:800;flex:1;line-height:1.2;color:var(--txt);letter-spacing:-.2px}
-.gc-team.right{text-align:right}
-.gc-vs-block{display:flex;flex-direction:column;align-items:center;flex-shrink:0;gap:2px}
-.gc-scores{display:flex;align-items:center;gap:6px}
-.gc-score-n{font-size:26px;font-weight:900;min-width:30px;text-align:center;line-height:1;letter-spacing:-1px}
-.gc-sep{font-size:13px;color:var(--txt3);font-weight:500}
-.gc-footer{display:flex;align-items:center;justify-content:center;margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
-.badge-live{font-size:9px;padding:3px 10px;border-radius:10px;background:var(--bg-danger);color:var(--txt-danger);font-weight:700;border:1px solid var(--border-danger);display:flex;align-items:center;gap:4px;animation:livefade 1.5s ease-in-out infinite}
-@keyframes livefade{0%,100%{box-shadow:0 0 0 0 var(--live-glow)}50%{box-shadow:0 0 8px 2px var(--live-glow)}}
-.badge-fin{font-size:9px;padding:3px 10px;border-radius:10px;background:var(--bg-success);color:var(--txt-success);font-weight:700;border:1px solid var(--border-success)}
-.badge-sch{font-size:9px;padding:3px 10px;border-radius:10px;background:var(--card2);color:var(--txt2);border:1px solid var(--border)}
-.hs-entry-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;background:var(--card);border-radius:16px;border:1.5px dashed var(--border2);font-size:13px;color:var(--txt2);cursor:pointer;margin-bottom:10px;font-weight:600;transition:all .2s;font-family:inherit}
-.hs-entry-btn:hover{border-color:var(--accent);color:var(--txt);background:rgba(59,130,246,.06)}
-.loader-row{display:flex;align-items:center;gap:10px;padding:28px 14px;font-size:12px;color:var(--txt2)}
-.spin{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-.empty{text-align:center;padding:52px 20px;color:var(--txt3);font-size:12px;line-height:1.7}
+    .topbar-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      gap: 6px
+    }
 
-/* ── Grid view ── */
-.grid-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
-.back-btn{font-size:11px;padding:5px 11px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap;flex-shrink:0;font-weight:600;transition:all .2s;font-family:inherit}
-.back-btn:hover{background:rgba(59,130,246,.1)}
-.grid-match-title{font-size:13px;font-weight:700;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.2px}
-.admin-btn{font-size:15px;padding:4px 8px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--txt2);cursor:pointer;flex-shrink:0;transition:all .2s}
-.admin-btn:hover{background:var(--card2)}
-.bet-info-bar{display:flex;align-items:center;gap:12px;padding:6px 14px;background:rgba(0,0,0,.25);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
-.bi-item{font-size:10px;color:var(--txt3);font-weight:500}
-.bi-val{font-weight:700;color:var(--txt)}
-.user-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;font-size:11px;flex-shrink:0}
-.user-bar.guest{background:var(--bg-warn);color:var(--txt-warn);border-bottom:1px solid rgba(245,158,11,.2)}
-.user-bar.loggedin{background:var(--bg-success);color:var(--txt-success);border-bottom:1px solid rgba(16,185,129,.2)}
-.grid-body{display:flex;flex:1;overflow:hidden}
-.grid-scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:6px;background:var(--bg3)}
-.grid-scroll::-webkit-scrollbar{width:3px;height:3px}
-.grid-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-table.bg{border-collapse:collapse}
-table.bg th,table.bg td{border:1px solid var(--border);padding:0;text-align:center}
-table.bg th{background:var(--bg2);font-weight:700;position:sticky;top:0;z-index:2;font-size:9px;padding:4px 2px;color:var(--txt2)}
-table.bg th:first-child{position:sticky;left:0;z-index:3;min-width:22px}
-table.bg td.rh{background:var(--bg2);font-weight:700;position:sticky;left:0;z-index:1;font-size:9px;padding:3px 4px;min-width:22px;color:var(--txt2)}
-table.bg td.c{cursor:pointer;vertical-align:middle;padding:1px;position:relative;height:30px;transition:background .15s}
-table.bg td.c:active{background:rgba(59,130,246,.15)}
-table.bg td.c.hit{background:rgba(251,191,36,.18);box-shadow:inset 0 0 8px rgba(251,191,36,.15)}
-table.bg td.c.betme{background:rgba(59,130,246,.08)}
-.hit-star{position:absolute;top:0;right:1px;font-size:7px;color:var(--orange)}
-.chips{display:flex;flex-direction:column;align-items:center;gap:1px;padding:1px}
-.chip{font-size:8px;padding:1px 3px;border-radius:3px;border:1px solid;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:1px;max-width:100%}
-.chip-del{font-size:7px;cursor:pointer;opacity:.5;flex-shrink:0;padding:1px}
-.chip-del:active{color:var(--live);opacity:1}
-.grid-legend{text-align:center;font-size:9px;color:var(--txt3);padding:3px 8px 5px;flex-shrink:0;background:var(--bg3)}
-.members-col{width:68px;flex-shrink:0;border-left:1px solid var(--border);background:var(--bg2);overflow-y:auto;padding:6px 4px}
-.members-col::-webkit-scrollbar{display:none}
-.mc-title{font-size:8px;font-weight:700;color:var(--txt3);text-transform:uppercase;margin-bottom:6px;text-align:center;letter-spacing:.06em}
-.mc-row{display:flex;align-items:center;gap:3px;padding:4px 2px;border-bottom:1px solid var(--border);font-size:9px}
-.mc-row:last-child{border-bottom:none}
-.mc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.mc-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:8px}
-.mc-n{color:var(--txt3);font-size:8px;flex-shrink:0;font-weight:700}
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1
+    }
 
-/* ── Summary ── */
-.sum-area{flex:1;overflow-y:auto;padding:10px;-webkit-overflow-scrolling:touch;background:var(--bg3)}
-.sum-area::-webkit-scrollbar{display:none}
-.metric-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.metric{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:10px 12px;backdrop-filter:blur(8px)}
-.m-lbl{font-size:9px;color:var(--txt3);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.m-val{font-size:20px;font-weight:800;letter-spacing:-.5px}
-.sec-lbl{font-size:9px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.tbl-wrap{border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:10px;background:var(--card)}
-table.st{width:100%;border-collapse:collapse;font-size:11px}
-table.st th{background:var(--bg2);padding:6px 9px;text-align:left;font-weight:700;font-size:9px;color:var(--txt3);text-transform:uppercase;letter-spacing:.05em}
-table.st td{padding:6px 9px;border-top:1px solid var(--border)}
-.tf td{padding:5px 9px;border-top:1px solid var(--border2);font-weight:700;font-size:10px;background:rgba(255,255,255,.03)}
-.pos{color:var(--txt-success)}.neg{color:var(--txt-danger)}
-.win-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:12px;margin-bottom:10px}
-.s-inp-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}
-.snum{width:46px;font-size:13px;padding:6px 6px;border-radius:8px;border:1px solid var(--border2);background:var(--card2);color:var(--txt);text-align:center;font-family:inherit;font-weight:700}
+    .top-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--accent-glow)
+    }
 
-/* ── Account ── */
-.acct-area{flex:1;overflow-y:auto;padding:10px;-webkit-overflow-scrolling:touch;background:var(--bg3)}
-.acct-area::-webkit-scrollbar{display:none}
-.card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:12px;margin-bottom:10px;backdrop-filter:blur(8px)}
-.toggle{width:38px;height:22px;border-radius:11px;background:var(--border2);position:relative;cursor:pointer;flex-shrink:0;transition:background .25s}
-.toggle.on{background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 8px var(--accent-glow)}
-.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .25s;box-shadow:0 1px 4px rgba(0,0,0,.4)}
-.toggle.on::after{left:19px}
-.tr{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--txt2)}
-.tr:last-child{border-bottom:none}
-.plat-card{border:1px solid var(--border);border-radius:12px;padding:11px;margin-bottom:8px;background:var(--card);transition:border-color .2s}
-.plat-card:hover{border-color:var(--border2)}
-.pstats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.pstat{background:var(--card2);border-radius:8px;padding:7px 10px}
-.pstat-lbl{font-size:8px;color:var(--txt3);margin-bottom:2px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.pstat-val{font-size:14px;font-weight:800;letter-spacing:-.3px}
-.avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0}
-.hrow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:10px}
-.hrow:last-child{border-bottom:none}
-.sport-tag{font-size:10px;padding:3px 8px;border-radius:6px;font-weight:700;letter-spacing:.02em}
-.tag-baseball{background:var(--bg-info);color:var(--txt-info);border:1px solid var(--border-info)}
-.tag-soccer{background:var(--bg-success);color:var(--txt-success);border:1px solid var(--border-success)}
+    .app-title {
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: linear-gradient(90deg, #fff, var(--txt2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -.3px
+    }
 
-/* ── Modals ── */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center;z-index:100;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.modal{background:var(--bg2);border-radius:24px 24px 0 0;padding:22px 18px 38px;width:100%;max-width:480px;border-top:1px solid var(--glass-border);max-height:90vh;overflow-y:auto}
-.modal::-webkit-scrollbar{display:none}
-.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:0 auto 18px}
-.modal h3{font-size:16px;font-weight:800;margin-bottom:16px;text-align:center;letter-spacing:-.3px}
-.mfield{margin-bottom:12px}
-.mfield label{font-size:9px;color:var(--txt3);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
-.mfield input{width:100%;font-size:14px;padding:11px 13px;border-radius:10px;border:1px solid var(--border2);background:var(--card2);color:var(--txt);font-family:inherit;transition:border-color .2s}
-.mfield input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
-.merr{font-size:11px;color:var(--txt-danger);margin-top:5px;min-height:16px}
-.mbtns{display:flex;gap:10px;margin-top:16px}
-.mbtns .btn{flex:1;padding:13px;font-size:14px;border-radius:12px;font-weight:700}
-.btn{font-size:13px;padding:9px 15px;border-radius:10px;border:1px solid var(--border2);background:var(--card2);color:var(--txt);cursor:pointer;text-align:center;font-family:inherit;font-weight:600;transition:all .2s}
-.btn:hover{background:var(--glass);border-color:var(--border2)}
-.btn:active{opacity:.75;transform:scale(.98)}
-.btn.pri{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 0 16px var(--accent-glow)}
-.btn.pri:hover{box-shadow:0 0 22px var(--accent-glow)}
-.btn.sm{font-size:10px;padding:4px 10px;border-radius:7px}
-.member-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.mchip{padding:7px 13px;border-radius:16px;font-size:12px;cursor:pointer;border:1.5px solid;transition:all .2s;font-weight:600}
-.mchip:hover{opacity:.85}
-.mchip:active{opacity:.6;transform:scale(.96)}
-.adm-sec{border-top:1px solid var(--border);margin-top:14px;padding-top:14px}
-.frow{display:flex;gap:8px;align-items:center;margin-bottom:10px}
-.frow label{font-size:10px;color:var(--txt3);min-width:80px;white-space:nowrap;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.frow input,.frow select{flex:1;font-size:12px;padding:8px 10px;border-radius:8px;border:1px solid var(--border2);background:var(--card2);color:var(--txt);font-family:inherit}
-.frow select option{background:var(--bg2)}
-.frow .snum{flex:none}
+    .top-sub {
+      font-size: 9px;
+      color: var(--txt3);
+      white-space: nowrap;
+      letter-spacing: .02em
+    }
 
-/* ── Toast ── */
-.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--glass-border);padding:9px 20px;border-radius:24px;font-size:12px;z-index:9999;white-space:nowrap;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;box-shadow:0 4px 24px rgba(0,0,0,.4);backdrop-filter:blur(16px);font-weight:600}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
-</style>
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--live);
+      animation: livepulse 1.2s infinite;
+      display: none;
+      box-shadow: 0 0 8px var(--live-glow)
+    }
+
+    @keyframes livepulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(.8)
+      }
+    }
+
+    .score-badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--card2);
+      font-weight: 700;
+      font-size: 13px;
+      display: none;
+      border: 1px solid var(--border2);
+      letter-spacing: .5px;
+      color: var(--txt)
+    }
+
+    .refresh-btn {
+      font-size: 15px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: var(--card);
+      color: var(--txt2);
+      cursor: pointer;
+      display: none;
+      transition: all .2s
+    }
+
+    .refresh-btn:active {
+      background: var(--card2);
+      color: var(--txt);
+      transform: rotate(120deg)
+    }
+
+    /* Today bar */
+    .today-bar {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 14px;
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+      background: rgba(0, 0, 0, .3);
+      -webkit-overflow-scrolling: touch
+    }
+
+    .today-bar::-webkit-scrollbar {
+      display: none
+    }
+
+    .today-lbl {
+      font-size: 8px;
+      color: var(--txt3);
+      white-space: nowrap;
+      font-weight: 700;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: .08em
+    }
+
+    .tg {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      font-size: 10px;
+      flex-shrink: 0;
+      transition: border-color .15s
+    }
+
+    .tg.live {
+      border-color: rgba(239, 68, 68, .5);
+      background: rgba(239, 68, 68, .08)
+    }
+
+    .tg-score {
+      font-weight: 700;
+      padding: 0 2px;
+      color: var(--txt)
+    }
+
+    .tg-team {
+      color: var(--txt3);
+      font-size: 9px
+    }
+
+    .spin-sm {
+      width: 9px;
+      height: 9px;
+      border: 1.5px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      flex-shrink: 0
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* Shell layout */
+    .content {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column
+    }
+
+    .panel {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    .panel.active {
+      display: flex
+    }
+
+    .bottom-nav {
+      display: flex;
+      background: rgba(13, 15, 20, .98);
+      border-top: 1px solid var(--glass-border);
+      flex-shrink: 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 4px 7px;
+      font-size: 9px;
+      color: var(--txt3);
+      background: none;
+      border: none;
+      cursor: pointer;
+      gap: 3px;
+      transition: color .2s;
+      font-family: inherit;
+      font-weight: 600;
+      letter-spacing: .02em
+    }
+
+    .nav-btn .icon {
+      font-size: 22px;
+      line-height: 1;
+      transition: transform .2s
+    }
+
+    .nav-btn.active {
+      color: var(--accent)
+    }
+
+    .nav-btn.active .icon {
+      transform: scale(1.1)
+    }
+
+    /* Views */
+    .view {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    .view.active {
+      display: flex
+    }
+
+    /* ── Sport tabs ── */
+    .sport-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      flex-shrink: 0
+    }
+
+    .sport-tabs::-webkit-scrollbar {
+      display: none
+    }
+
+    .stab {
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--txt2);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all .2s;
+      font-weight: 600;
+      letter-spacing: .02em;
+      font-family: inherit
+    }
+
+    .stab:hover {
+      border-color: var(--accent);
+      color: var(--txt)
+    }
+
+    .stab.on {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 0 14px var(--accent-glow)
+    }
+
+    /* ── Game list ── */
+    .game-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 12px 4px;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg3)
+    }
+
+    .game-list::-webkit-scrollbar {
+      display: none
+    }
+
+    .game-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 14px 15px 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all .2s;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px)
+    }
+
+    .game-card:hover {
+      border-color: var(--border2);
+      background: var(--card2);
+      transform: translateY(-1px)
+    }
+
+    .game-card:active {
+      transform: translateY(0);
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, .08)
+    }
+
+    .gc-league {
+      font-size: 9px;
+      color: var(--txt3);
+      margin-bottom: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .gc-league-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0
+    }
+
+    .gc-teams {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .gc-team {
+      font-size: 15px;
+      font-weight: 800;
+      flex: 1;
+      line-height: 1.2;
+      color: var(--txt);
+      letter-spacing: -.2px
+    }
+
+    .gc-team.right {
+      text-align: right
+    }
+
+    .gc-vs-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      gap: 2px
+    }
+
+    .gc-scores {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .gc-score-n {
+      font-size: 26px;
+      font-weight: 900;
+      min-width: 30px;
+      text-align: center;
+      line-height: 1;
+      letter-spacing: -1px
+    }
+
+    .gc-sep {
+      font-size: 13px;
+      color: var(--txt3);
+      font-weight: 500
+    }
+
+    .gc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border)
+    }
+
+    .badge-live {
+      font-size: 9px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--bg-danger);
+      color: var(--txt-danger);
+      font-weight: 700;
+      border: 1px solid var(--border-danger);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      animation: livefade 1.5s ease-in-out infinite
+    }
+
+    @keyframes livefade {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 var(--live-glow)
+      }
+
+      50% {
+        box-shadow: 0 0 8px 2px var(--live-glow)
+      }
+    }
+
+    .badge-fin {
+      font-size: 9px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--bg-success);
+      color: var(--txt-success);
+      font-weight: 700;
+      border: 1px solid var(--border-success)
+    }
+
+    .badge-sch {
+      font-size: 9px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: var(--card2);
+      color: var(--txt2);
+      border: 1px solid var(--border)
+    }
+
+    .hs-entry-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1.5px dashed var(--border2);
+      font-size: 13px;
+      color: var(--txt2);
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: 600;
+      transition: all .2s;
+      font-family: inherit
+    }
+
+    .hs-entry-btn:hover {
+      border-color: var(--accent);
+      color: var(--txt);
+      background: rgba(59, 130, 246, .06)
+    }
+
+    .loader-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 28px 14px;
+      font-size: 12px;
+      color: var(--txt2)
+    }
+
+    .spin {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      flex-shrink: 0
+    }
+
+    .empty {
+      text-align: center;
+      padding: 52px 20px;
+      color: var(--txt3);
+      font-size: 12px;
+      line-height: 1.7
+    }
+
+    /* ── Grid view ── */
+    .grid-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0
+    }
+
+    .back-btn {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-weight: 600;
+      transition: all .2s;
+      font-family: inherit
+    }
+
+    .back-btn:hover {
+      background: rgba(59, 130, 246, .1)
+    }
+
+    .grid-match-title {
+      font-size: 13px;
+      font-weight: 700;
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -.2px
+    }
+
+    .admin-btn {
+      font-size: 15px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--txt2);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all .2s
+    }
+
+    .admin-btn:hover {
+      background: var(--card2)
+    }
+
+    .bet-info-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 14px;
+      background: rgba(0, 0, 0, .25);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      flex-wrap: wrap
+    }
+
+    .bi-item {
+      font-size: 10px;
+      color: var(--txt3);
+      font-weight: 500
+    }
+
+    .bi-val {
+      font-weight: 700;
+      color: var(--txt)
+    }
+
+    .user-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 14px;
+      font-size: 11px;
+      flex-shrink: 0
+    }
+
+    .user-bar.guest {
+      background: var(--bg-warn);
+      color: var(--txt-warn);
+      border-bottom: 1px solid rgba(245, 158, 11, .2)
+    }
+
+    .user-bar.loggedin {
+      background: var(--bg-success);
+      color: var(--txt-success);
+      border-bottom: 1px solid rgba(16, 185, 129, .2)
+    }
+
+    .grid-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden
+    }
+
+    .grid-scroll {
+      flex: 1;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 6px;
+      background: var(--bg3)
+    }
+
+    .grid-scroll::-webkit-scrollbar {
+      width: 3px;
+      height: 3px
+    }
+
+    .grid-scroll::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 3px
+    }
+
+    table.bg {
+      border-collapse: collapse
+    }
+
+    table.bg th,
+    table.bg td {
+      border: 1px solid var(--border);
+      padding: 0;
+      text-align: center
+    }
+
+    table.bg th {
+      background: var(--bg2);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 9px;
+      padding: 4px 2px;
+      color: var(--txt2)
+    }
+
+    table.bg th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 3;
+      min-width: 22px
+    }
+
+    table.bg td.rh {
+      background: var(--bg2);
+      font-weight: 700;
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      font-size: 9px;
+      padding: 3px 4px;
+      min-width: 22px;
+      color: var(--txt2)
+    }
+
+    table.bg td.c {
+      cursor: pointer;
+      vertical-align: middle;
+      padding: 1px;
+      position: relative;
+      height: 30px;
+      transition: background .15s
+    }
+
+    table.bg td.c:active {
+      background: rgba(59, 130, 246, .15)
+    }
+
+    table.bg td.c.hit {
+      background: rgba(251, 191, 36, .18);
+      box-shadow: inset 0 0 8px rgba(251, 191, 36, .15)
+    }
+
+    table.bg td.c.betme {
+      background: rgba(59, 130, 246, .08)
+    }
+
+    .hit-star {
+      position: absolute;
+      top: 0;
+      right: 1px;
+      font-size: 7px;
+      color: var(--orange)
+    }
+
+    .chips {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      padding: 1px
+    }
+
+    .chip {
+      font-size: 8px;
+      padding: 1px 3px;
+      border-radius: 3px;
+      border: 1px solid;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 1px;
+      max-width: 100%
+    }
+
+    .chip-del {
+      font-size: 7px;
+      cursor: pointer;
+      opacity: .5;
+      flex-shrink: 0;
+      padding: 1px
+    }
+
+    .chip-del:active {
+      color: var(--live);
+      opacity: 1
+    }
+
+    .grid-legend {
+      text-align: center;
+      font-size: 9px;
+      color: var(--txt3);
+      padding: 3px 8px 5px;
+      flex-shrink: 0;
+      background: var(--bg3)
+    }
+
+    .members-col {
+      width: 68px;
+      flex-shrink: 0;
+      border-left: 1px solid var(--border);
+      background: var(--bg2);
+      overflow-y: auto;
+      padding: 6px 4px
+    }
+
+    .members-col::-webkit-scrollbar {
+      display: none
+    }
+
+    .mc-title {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--txt3);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      text-align: center;
+      letter-spacing: .06em
+    }
+
+    .mc-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 4px 2px;
+      border-bottom: 1px solid var(--border);
+      font-size: 9px
+    }
+
+    .mc-row:last-child {
+      border-bottom: none
+    }
+
+    .mc-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .mc-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 8px
+    }
+
+    .mc-n {
+      color: var(--txt3);
+      font-size: 8px;
+      flex-shrink: 0;
+      font-weight: 700
+    }
+
+    /* ── Summary ── */
+    .sum-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg3)
+    }
+
+    .sum-area::-webkit-scrollbar {
+      display: none
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px
+    }
+
+    .metric {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      backdrop-filter: blur(8px)
+    }
+
+    .m-lbl {
+      font-size: 9px;
+      color: var(--txt3);
+      margin-bottom: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em
+    }
+
+    .m-val {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.5px
+    }
+
+    .sec-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px
+    }
+
+    .tbl-wrap {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 10px;
+      background: var(--card)
+    }
+
+    table.st {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px
+    }
+
+    table.st th {
+      background: var(--bg2);
+      padding: 6px 9px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 9px;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    table.st td {
+      padding: 6px 9px;
+      border-top: 1px solid var(--border)
+    }
+
+    .tf td {
+      padding: 5px 9px;
+      border-top: 1px solid var(--border2);
+      font-weight: 700;
+      font-size: 10px;
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .pos {
+      color: var(--txt-success)
+    }
+
+    .neg {
+      color: var(--txt-danger)
+    }
+
+    .win-card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin-bottom: 10px
+    }
+
+    .s-inp-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 8px
+    }
+
+    .snum {
+      width: 46px;
+      font-size: 13px;
+      padding: 6px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: var(--card2);
+      color: var(--txt);
+      text-align: center;
+      font-family: inherit;
+      font-weight: 700
+    }
+
+    /* ── Account ── */
+    .acct-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg3)
+    }
+
+    .acct-area::-webkit-scrollbar {
+      display: none
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin-bottom: 10px;
+      backdrop-filter: blur(8px)
+    }
+
+    .toggle {
+      width: 38px;
+      height: 22px;
+      border-radius: 11px;
+      background: var(--border2);
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .25s
+    }
+
+    .toggle.on {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 8px var(--accent-glow)
+    }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      top: 3px;
+      left: 3px;
+      transition: left .25s;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .4)
+    }
+
+    .toggle.on::after {
+      left: 19px
+    }
+
+    .tr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--txt2)
+    }
+
+    .tr:last-child {
+      border-bottom: none
+    }
+
+    .plat-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px;
+      margin-bottom: 8px;
+      background: var(--card);
+      transition: border-color .2s
+    }
+
+    .plat-card:hover {
+      border-color: var(--border2)
+    }
+
+    .pstats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px
+    }
+
+    .pstat {
+      background: var(--card2);
+      border-radius: 8px;
+      padding: 7px 10px
+    }
+
+    .pstat-lbl {
+      font-size: 8px;
+      color: var(--txt3);
+      margin-bottom: 2px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    .pstat-val {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.3px
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      flex-shrink: 0
+    }
+
+    .hrow {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 10px
+    }
+
+    .hrow:last-child {
+      border-bottom: none
+    }
+
+    .sport-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: .02em
+    }
+
+    .tag-baseball {
+      background: var(--bg-info);
+      color: var(--txt-info);
+      border: 1px solid var(--border-info)
+    }
+
+    .tag-soccer {
+      background: var(--bg-success);
+      color: var(--txt-success);
+      border: 1px solid var(--border-success)
+    }
+
+    /* ── Modals ── */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .7);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px)
+    }
+
+    .modal {
+      background: var(--bg2);
+      border-radius: 24px 24px 0 0;
+      padding: 22px 18px 38px;
+      width: 100%;
+      max-width: 480px;
+      border-top: 1px solid var(--glass-border);
+      max-height: 90vh;
+      overflow-y: auto
+    }
+
+    .modal::-webkit-scrollbar {
+      display: none
+    }
+
+    .modal-handle {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border2);
+      margin: 0 auto 18px
+    }
+
+    .modal h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-align: center;
+      letter-spacing: -.3px
+    }
+
+    .mfield {
+      margin-bottom: 12px
+    }
+
+    .mfield label {
+      font-size: 9px;
+      color: var(--txt3);
+      display: block;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700
+    }
+
+    .mfield input {
+      width: 100%;
+      font-size: 14px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border2);
+      background: var(--card2);
+      color: var(--txt);
+      font-family: inherit;
+      transition: border-color .2s
+    }
+
+    .mfield input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow)
+    }
+
+    .merr {
+      font-size: 11px;
+      color: var(--txt-danger);
+      margin-top: 5px;
+      min-height: 16px
+    }
+
+    .mbtns {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px
+    }
+
+    .mbtns .btn {
+      flex: 1;
+      padding: 13px;
+      font-size: 14px;
+      border-radius: 12px;
+      font-weight: 700
+    }
+
+    .btn {
+      font-size: 13px;
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border2);
+      background: var(--card2);
+      color: var(--txt);
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      font-weight: 600;
+      transition: all .2s
+    }
+
+    .btn:hover {
+      background: var(--glass);
+      border-color: var(--border2)
+    }
+
+    .btn:active {
+      opacity: .75;
+      transform: scale(.98)
+    }
+
+    .btn.pri {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 16px var(--accent-glow)
+    }
+
+    .btn.pri:hover {
+      box-shadow: 0 0 22px var(--accent-glow)
+    }
+
+    .btn.sm {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 7px
+    }
+
+    .member-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px
+    }
+
+    .mchip {
+      padding: 7px 13px;
+      border-radius: 16px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1.5px solid;
+      transition: all .2s;
+      font-weight: 600
+    }
+
+    .mchip:hover {
+      opacity: .85
+    }
+
+    .mchip:active {
+      opacity: .6;
+      transform: scale(.96)
+    }
+
+    .adm-sec {
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+      padding-top: 14px
+    }
+
+    .frow {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px
+    }
+
+    .frow label {
+      font-size: 10px;
+      color: var(--txt3);
+      min-width: 80px;
+      white-space: nowrap;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em
+    }
+
+    .frow input,
+    .frow select {
+      flex: 1;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: var(--card2);
+      color: var(--txt);
+      font-family: inherit
+    }
+
+    .frow select option {
+      background: var(--bg2)
+    }
+
+    .frow .snum {
+      flex: none
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card2);
+      border: 1px solid var(--glass-border);
+      padding: 9px 20px;
+      border-radius: 24px;
+      font-size: 12px;
+      z-index: 9999;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .4);
+      backdrop-filter: blur(16px);
+      font-weight: 600
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px)
+    }
+  </style>
 </head>
+
 <body>
-<div class="shell">
+  <div class="shell">
 
-<div class="topbar">
-  <div class="topbar-main">
-    <div class="top-left">
-      <div class="top-logo">🎯</div>
-      <div>
-        <div class="app-title" id="top-title">スポーツベット 2026</div>
-        <div class="top-sub" id="top-sub">試合を選んでベット</div>
-      </div>
-    </div>
-    <div class="top-right">
-      <div class="live-dot" id="live-dot"></div>
-      <div class="score-badge" id="score-badge">0–0</div>
-      <button class="refresh-btn" id="refresh-btn" onclick="refreshScore()">↻</button>
-    </div>
-  </div>
-  <div class="today-bar" id="today-bar">
-    <span class="today-lbl">TODAY</span>
-    <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--txt3)" id="today-loader"><div class="spin-sm"></div>取得中</div>
-  </div>
-</div>
-
-<div class="content">
-
-  <!-- BET PANEL -->
-  <div class="panel active" id="panel-bet">
-
-    <!-- VIEW: game list -->
-    <div class="view active" id="view-list">
-      <div class="sport-tabs">
-        <div class="stab on" onclick="setSport('mlb',this)">⚾ NPB / MLB</div>
-        <div class="stab" onclick="setSport('soccer',this)">⚽ サッカー</div>
-        <div class="stab" onclick="setSport('wbc',this)">🏆 WBC</div>
-        <div class="stab" onclick="setSport('hs',this)">🏫 高校野球</div>
-      </div>
-      <div class="game-list" id="game-list">
-        <div class="loader-row"><div class="spin"></div>試合データを取得中...</div>
-      </div>
-    </div>
-
-    <!-- VIEW: grid -->
-    <div class="view" id="view-grid">
-      <div class="grid-header">
-        <button class="back-btn" onclick="goBack()">← 試合一覧</button>
-        <div class="grid-match-title" id="grid-title">試合を選択</div>
-        <button class="admin-btn" onclick="openAdminModal()">⚙️</button>
-      </div>
-      <div class="bet-info-bar">
-        <span class="bi-item">賭け金額: <span class="bi-val" id="bi-amount">¥500</span></span>
-        <span class="bi-item">方式: <span class="bi-val" id="bi-mode">1票</span></span>
-      </div>
-      <div class="user-bar guest" id="user-bar">
-        <span>⚠️ ログインしてベット</span>
-        <button class="btn sm" onclick="openLoginModal()" style="border-color:var(--txt-warn);color:var(--txt-warn);background:transparent">ログイン</button>
-      </div>
-      <div class="grid-body">
-        <div class="grid-scroll">
-          <table class="bg" id="bet-grid"></table>
-          <div class="grid-legend">ヨコ = <span id="lbl-a">チームA</span>点 · タテ = <span id="lbl-b">チームB</span>点 · ★ 現在</div>
+    <div class="topbar">
+      <div class="topbar-main">
+        <div class="top-left">
+          <div class="top-logo">🎯</div>
+          <div>
+            <div class="app-title" id="top-title">スポーツベット 2026</div>
+            <div class="top-sub" id="top-sub">試合を選んでベット</div>
+          </div>
         </div>
-        <div class="members-col">
-          <div class="mc-title">メンバー</div>
-          <div id="mc-list"></div>
+        <div class="top-right">
+          <div class="live-dot" id="live-dot"></div>
+          <div class="score-badge" id="score-badge">0–0</div>
+          <button class="refresh-btn" id="refresh-btn" onclick="refreshScore()">↻</button>
+        </div>
+      </div>
+      <div class="today-bar" id="today-bar">
+        <span class="today-lbl">TODAY</span>
+        <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--txt3)" id="today-loader">
+          <div class="spin-sm"></div>取得中
         </div>
       </div>
     </div>
 
-  </div>
+    <div class="content">
 
-  <!-- SUMMARY PANEL -->
-  <div class="panel" id="panel-summary">
-    <div class="sum-area">
-      <div class="metric-row">
-        <div class="metric"><div class="m-lbl">総ベット数</div><div class="m-val" id="m1">0</div></div>
-        <div class="metric"><div class="m-lbl">プール総額</div><div class="m-val" id="m4">¥0</div></div>
-        <div class="metric"><div class="m-lbl">総賭け金</div><div class="m-val" id="m2">¥0</div></div>
-        <div class="metric"><div class="m-lbl">メンバー数</div><div class="m-val" id="m3">0</div></div>
-      </div>
-      <div class="sec-lbl">当日</div>
-      <div class="tbl-wrap"><table class="st"><thead><tr><th>名前</th><th>賭金</th><th>払戻</th><th>合計</th></tr></thead><tbody id="d-body"></tbody><tfoot><tr class="tf"><td>合計</td><td id="d-w"></td><td id="d-p"></td><td id="d-n"></td></tr></tfoot></table></div>
-      <div class="sec-lbl" style="margin-top:8px">トータル</div>
-      <div class="tbl-wrap"><table class="st"><thead><tr><th>名前</th><th>賭金</th><th>払戻</th><th>合計</th></tr></thead><tbody id="t-body"></tbody><tfoot><tr class="tf"><td>合計</td><td id="t-w"></td><td id="t-p"></td><td id="t-n"></td></tr></tfoot></table></div>
-      <div class="win-card">
-        <div class="sec-lbl">勝者確定 & 払い戻し</div>
-        <div class="s-inp-row">
-          <span style="font-size:11px" id="fin-la">チームA</span>
-          <input type="number" id="fin-a" value="0" min="0" max="20" class="snum"/>
-          <span style="color:var(--txt2)">–</span>
-          <span style="font-size:11px" id="fin-lb">チームB</span>
-          <input type="number" id="fin-b" value="0" min="0" max="20" class="snum"/>
-          <button class="btn pri" onclick="declareWinner()" style="font-size:12px;padding:7px 10px">計算</button>
+      <!-- BET PANEL -->
+      <div class="panel active" id="panel-bet">
+
+        <!-- VIEW: game list -->
+        <div class="view active" id="view-list">
+          <div class="sport-tabs">
+            <div class="stab on" onclick="setSport('mlb',this)">⚾ NPB / MLB</div>
+            <div class="stab" onclick="setSport('soccer',this)">⚽ サッカー</div>
+            <div class="stab" onclick="setSport('wbc',this)">🏆 WBC</div>
+            <div class="stab" onclick="setSport('hs',this)">🏫 高校野球</div>
+          </div>
+          <div class="game-list" id="game-list">
+            <div class="loader-row">
+              <div class="spin"></div>試合データを取得中...
+            </div>
+          </div>
         </div>
-        <div id="win-msg" style="margin-top:7px;font-size:11px"></div>
+
+        <!-- VIEW: grid -->
+        <div class="view" id="view-grid">
+          <div class="grid-header">
+            <button class="back-btn" onclick="goBack()">← 試合一覧</button>
+            <div class="grid-match-title" id="grid-title">試合を選択</div>
+            <button class="admin-btn" onclick="openAdminModal()">⚙️</button>
+          </div>
+          <div class="bet-info-bar">
+            <span class="bi-item">賭け金額: <span class="bi-val" id="bi-amount">¥500</span></span>
+            <span class="bi-item">方式: <span class="bi-val" id="bi-mode">1票</span></span>
+          </div>
+          <div class="user-bar guest" id="user-bar">
+            <span>⚠️ ログインしてベット</span>
+            <button class="btn sm" onclick="openLoginModal()"
+              style="border-color:var(--txt-warn);color:var(--txt-warn);background:transparent">ログイン</button>
+          </div>
+          <div class="grid-body">
+            <div class="grid-scroll">
+              <table class="bg" id="bet-grid"></table>
+              <div class="grid-legend">ヨコ = <span id="lbl-a">チームA</span>点 · タテ = <span id="lbl-b">チームB</span>点 · ★ 現在
+              </div>
+            </div>
+            <div class="members-col">
+              <div class="mc-title">メンバー</div>
+              <div id="mc-list"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <!-- SUMMARY PANEL -->
+      <div class="panel" id="panel-summary">
+        <div class="sum-area">
+          <div class="metric-row">
+            <div class="metric">
+              <div class="m-lbl">総ベット数</div>
+              <div class="m-val" id="m1">0</div>
+            </div>
+            <div class="metric">
+              <div class="m-lbl">プール総額</div>
+              <div class="m-val" id="m4">¥0</div>
+            </div>
+            <div class="metric">
+              <div class="m-lbl">総賭け金</div>
+              <div class="m-val" id="m2">¥0</div>
+            </div>
+            <div class="metric">
+              <div class="m-lbl">メンバー数</div>
+              <div class="m-val" id="m3">0</div>
+            </div>
+          </div>
+          <div class="sec-lbl">当日</div>
+          <div class="tbl-wrap">
+            <table class="st">
+              <thead>
+                <tr>
+                  <th>名前</th>
+                  <th>賭金</th>
+                  <th>払戻</th>
+                  <th>合計</th>
+                </tr>
+              </thead>
+              <tbody id="d-body"></tbody>
+              <tfoot>
+                <tr class="tf">
+                  <td>合計</td>
+                  <td id="d-w"></td>
+                  <td id="d-p"></td>
+                  <td id="d-n"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="sec-lbl" style="margin-top:8px">トータル</div>
+          <div class="tbl-wrap">
+            <table class="st">
+              <thead>
+                <tr>
+                  <th>名前</th>
+                  <th>賭金</th>
+                  <th>払戻</th>
+                  <th>合計</th>
+                </tr>
+              </thead>
+              <tbody id="t-body"></tbody>
+              <tfoot>
+                <tr class="tf">
+                  <td>合計</td>
+                  <td id="t-w"></td>
+                  <td id="t-p"></td>
+                  <td id="t-n"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="win-card">
+            <div class="sec-lbl">勝者確定 & 払い戻し</div>
+            <div class="s-inp-row">
+              <span style="font-size:11px" id="fin-la">チームA</span>
+              <input type="number" id="fin-a" value="0" min="0" max="20" class="snum" />
+              <span style="color:var(--txt2)">–</span>
+              <span style="font-size:11px" id="fin-lb">チームB</span>
+              <input type="number" id="fin-b" value="0" min="0" max="20" class="snum" />
+              <button class="btn pri" onclick="declareWinner()" style="font-size:12px;padding:7px 10px">計算</button>
+            </div>
+            <div id="win-msg" style="margin-top:7px;font-size:11px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCOUNT PANEL -->
+      <div class="panel" id="panel-account">
+        <div class="acct-area" id="acct-view"></div>
+      </div>
+
     </div>
+
+    <div class="bottom-nav">
+      <button class="nav-btn active" id="nav-bet" onclick="nav('bet',this)"><span class="icon">🎯</span>賭けマス</button>
+      <button class="nav-btn" id="nav-summary" onclick="nav('summary',this)"><span class="icon">📊</span>集計</button>
+      <button class="nav-btn" id="nav-account" onclick="nav('account',this)"><span class="icon">👤</span>アカウント</button>
+    </div>
+
   </div>
 
-  <!-- ACCOUNT PANEL -->
-  <div class="panel" id="panel-account">
-    <div class="acct-area" id="acct-view"></div>
-  </div>
-
-</div>
-
-<div class="bottom-nav">
-  <button class="nav-btn active" id="nav-bet" onclick="nav('bet',this)"><span class="icon">🎯</span>賭けマス</button>
-  <button class="nav-btn" id="nav-summary" onclick="nav('summary',this)"><span class="icon">📊</span>集計</button>
-  <button class="nav-btn" id="nav-account" onclick="nav('account',this)"><span class="icon">👤</span>アカウント</button>
-</div>
-
-</div>
-
-<!-- LOGIN MODAL -->
-<div id="login-modal" class="modal-bg" style="display:none">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>🔐 ログイン</h3>
-    <div class="mfield"><label>ニックネーム</label><input id="m-name" type="text" placeholder="名前を入力..." autocomplete="username"/></div>
-    <div class="mfield"><label>パスワード</label><input id="m-pass" type="password" placeholder="パスワードを入力..." autocomplete="current-password"/></div>
-    <div class="merr" id="m-err"></div>
-    <div class="mbtns">
-      <button class="btn" onclick="closeLoginModal()">キャンセル</button>
-      <button class="btn pri" onclick="doLogin()">ログイン</button>
-    </div>
-    <div style="margin-top:14px;padding-top:12px;border-top:0.5px solid var(--border)">
-      <div style="font-size:10px;color:var(--txt2);margin-bottom:8px">既存メンバーを選択:</div>
-      <div class="member-chips" id="m-members"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN MODAL -->
-<div id="admin-modal" class="modal-bg" style="display:none">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>⚙️ アドミン設定</h3>
-    <div id="a-auth">
-      <div class="mfield"><label>アドミンパスワード</label><input id="a-pass" type="password" placeholder="パスワードを入力..."/></div>
-      <div class="merr" id="a-err"></div>
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal-bg" style="display:none">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>🔐 ログイン</h3>
+      <div class="mfield"><label>ニックネーム</label><input id="m-name" type="text" placeholder="名前を入力..."
+          autocomplete="username" /></div>
+      <div class="mfield"><label>パスワード</label><input id="m-pass" type="password" placeholder="パスワードを入力..."
+          autocomplete="current-password" /></div>
+      <div class="merr" id="m-err"></div>
       <div class="mbtns">
-        <button class="btn" onclick="closeAdminModal()">キャンセル</button>
-        <button class="btn pri" onclick="unlockAdmin()">認証</button>
+        <button class="btn" onclick="closeLoginModal()">キャンセル</button>
+        <button class="btn pri" onclick="doLogin()">ログイン</button>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:0.5px solid var(--border)">
+        <div style="font-size:10px;color:var(--txt2);margin-bottom:8px">既存メンバーを選択:</div>
+        <div class="member-chips" id="m-members"></div>
       </div>
     </div>
-    <div id="a-settings" style="display:none">
-      <div class="adm-sec">
-        <div class="sec-lbl" style="margin-bottom:8px">プラットフォーム</div>
-        <div class="frow"><label>名前</label><input id="a-pname" type="text"/></div>
-        <div class="frow"><label>スポーツ</label><select id="a-sport"><option value="baseball">⚾ 野球</option><option value="soccer">⚽ サッカー</option></select></div>
+  </div>
+
+  <!-- ADMIN MODAL -->
+  <div id="admin-modal" class="modal-bg" style="display:none">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>⚙️ アドミン設定</h3>
+      <div id="a-auth">
+        <div class="mfield"><label>アドミンパスワード</label><input id="a-pass" type="password" placeholder="パスワードを入力..." />
+        </div>
+        <div class="merr" id="a-err"></div>
+        <div class="mbtns">
+          <button class="btn" onclick="closeAdminModal()">キャンセル</button>
+          <button class="btn pri" onclick="unlockAdmin()">認証</button>
+        </div>
       </div>
-      <div class="adm-sec">
-        <div class="sec-lbl" style="margin-bottom:8px">試合</div>
-        <div class="frow"><label>チームA（ヨコ）</label><input id="a-ta" type="text"/></div>
-        <div class="frow"><label>チームB（タテ）</label><input id="a-tb" type="text"/></div>
-        <div class="frow"><label>スコア</label><input type="number" id="a-sa" class="snum" min="0" max="30"/><span style="color:var(--txt2);padding:0 4px">–</span><input type="number" id="a-sb" class="snum" min="0" max="30"/></div>
-        <div class="frow"><label>グリッドサイズ</label><select id="a-grid"><option value="5">0〜5</option><option value="7">0〜7</option><option value="10">0〜10</option><option value="12">0〜12</option></select></div>
+      <div id="a-settings" style="display:none">
+        <div class="adm-sec">
+          <div class="sec-lbl" style="margin-bottom:8px">プラットフォーム</div>
+          <div class="frow"><label>名前</label><input id="a-pname" type="text" /></div>
+          <div class="frow"><label>スポーツ</label><select id="a-sport">
+              <option value="baseball">⚾ 野球</option>
+              <option value="soccer">⚽ サッカー</option>
+            </select></div>
+        </div>
+        <div class="adm-sec">
+          <div class="sec-lbl" style="margin-bottom:8px">試合</div>
+          <div class="frow"><label>チームA（ヨコ）</label><input id="a-ta" type="text" /></div>
+          <div class="frow"><label>チームB（タテ）</label><input id="a-tb" type="text" /></div>
+          <div class="frow"><label>スコア</label><input type="number" id="a-sa" class="snum" min="0" max="30" /><span
+              style="color:var(--txt2);padding:0 4px">–</span><input type="number" id="a-sb" class="snum" min="0"
+              max="30" /></div>
+          <div class="frow"><label>グリッドサイズ</label><select id="a-grid">
+              <option value="5">0〜5</option>
+              <option value="7">0〜7</option>
+              <option value="10">0〜10</option>
+              <option value="12">0〜12</option>
+            </select></div>
+        </div>
+        <div class="adm-sec">
+          <div class="sec-lbl" style="margin-bottom:8px">ベット設定</div>
+          <div class="frow"><label>賭け金額</label><select id="a-amt">
+              <option value="100">¥100</option>
+              <option value="200">¥200</option>
+              <option value="300">¥300</option>
+              <option value="500">¥500</option>
+              <option value="600">¥600</option>
+              <option value="1000">¥1,000</option>
+            </select></div>
+          <div class="tr" style="margin-top:4px"><span style="font-size:12px">複数ベット許可</span>
+            <div class="toggle" id="a-multi" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+        <div class="mbtns" style="margin-top:14px">
+          <button class="btn" onclick="closeAdminModal()">キャンセル</button>
+          <button class="btn pri" onclick="saveAdmin()">保存</button>
+        </div>
       </div>
-      <div class="adm-sec">
-        <div class="sec-lbl" style="margin-bottom:8px">ベット設定</div>
-        <div class="frow"><label>賭け金額</label><select id="a-amt"><option value="100">¥100</option><option value="200">¥200</option><option value="300">¥300</option><option value="500">¥500</option><option value="600">¥600</option><option value="1000">¥1,000</option></select></div>
-        <div class="tr" style="margin-top:4px"><span style="font-size:12px">複数ベット許可</span><div class="toggle" id="a-multi" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+  </div>
+
+  <!-- HS MODAL -->
+  <div id="hs-modal" class="modal-bg" style="display:none">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>🏫 高校野球 手動入力</h3>
+      <div
+        style="font-size:11px;color:var(--txt-warn);background:var(--bg-warn);border-radius:8px;padding:9px 11px;margin-bottom:14px;line-height:1.5">
+        ⚠️ 高校野球はAPI取得不可。<a href="https://sports.yahoo.co.jp/baseball/highschool/" target="_blank"
+          style="color:var(--txt-info)">SpoNavi →</a> でスコアを確認してください。</div>
+      <div class="mfield"><label>チームA（ヨコ）</label><input id="hs-ta" type="text" placeholder="例: 沖縄尚学" /></div>
+      <div class="mfield"><label>チームB（タテ）</label><input id="hs-tb" type="text" placeholder="例: 帝京" /></div>
+      <div class="mfield"><label>スコア（A – B）</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="number" id="hs-sa" value="0" min="0" max="30" class="snum" />
+          <span style="color:var(--txt2)">–</span>
+          <input type="number" id="hs-sb" value="0" min="0" max="30" class="snum" />
+        </div>
       </div>
+      <div class="mfield"><label>大会名</label><input id="hs-league" type="text" placeholder="例: 春のセンバツ 2026" /></div>
+      <div style="font-size:10px;color:var(--txt2);margin-bottom:6px">サンプル試合:</div>
+      <div id="hs-samples" style="display:flex;flex-direction:column;gap:6px;margin-bottom:4px"></div>
       <div class="mbtns" style="margin-top:14px">
-        <button class="btn" onclick="closeAdminModal()">キャンセル</button>
-        <button class="btn pri" onclick="saveAdmin()">保存</button>
+        <button class="btn" onclick="closeHSModal()">キャンセル</button>
+        <button class="btn pri" onclick="applyHS()">この試合でベット</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- HS MODAL -->
-<div id="hs-modal" class="modal-bg" style="display:none">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>🏫 高校野球 手動入力</h3>
-    <div style="font-size:11px;color:var(--txt-warn);background:var(--bg-warn);border-radius:8px;padding:9px 11px;margin-bottom:14px;line-height:1.5">⚠️ 高校野球はAPI取得不可。<a href="https://sports.yahoo.co.jp/baseball/highschool/" target="_blank" style="color:var(--txt-info)">SpoNavi →</a> でスコアを確認してください。</div>
-    <div class="mfield"><label>チームA（ヨコ）</label><input id="hs-ta" type="text" placeholder="例: 沖縄尚学"/></div>
-    <div class="mfield"><label>チームB（タテ）</label><input id="hs-tb" type="text" placeholder="例: 帝京"/></div>
-    <div class="mfield"><label>スコア（A – B）</label>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="hs-sa" value="0" min="0" max="30" class="snum"/>
-        <span style="color:var(--txt2)">–</span>
-        <input type="number" id="hs-sb" value="0" min="0" max="30" class="snum"/>
-      </div>
-    </div>
-    <div class="mfield"><label>大会名</label><input id="hs-league" type="text" placeholder="例: 春のセンバツ 2026"/></div>
-    <div style="font-size:10px;color:var(--txt2);margin-bottom:6px">サンプル試合:</div>
-    <div id="hs-samples" style="display:flex;flex-direction:column;gap:6px;margin-bottom:4px"></div>
-    <div class="mbtns" style="margin-top:14px">
-      <button class="btn" onclick="closeHSModal()">キャンセル</button>
-      <button class="btn pri" onclick="applyHS()">この試合でベット</button>
-    </div>
-  </div>
-</div>
+  <div id="_toast" class="toast"></div>
 
-<div id="_toast" class="toast"></div>
+  <script>
+    const PC = ['#185FA5', '#0F6E56', '#993C1D', '#993556', '#3B6D11', '#854F0B', '#A32D2D', '#534AB7', '#5F5E5A', '#BA7517'];
+    const ESPNB = 'https://site.api.espn.com/apis/site/v2/sports';
+    const PROXY = 'https://corsproxy.io/?url=';
+    const ADMIN_PASS = 'admin123', USER_PASS = 'Pass';
 
-<script>
-const PC=['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#A32D2D','#534AB7','#5F5E5A','#BA7517'];
-const ESPNB='https://site.api.espn.com/apis/site/v2/sports';
-const PROXY='https://corsproxy.io/?url=';
-const ADMIN_PASS='admin123',USER_PASS='Pass';
+    function ls(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch { return null; } }
 
-function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v));}catch{return null;}}
+    const DEF = {
+      platformName: 'スポーツベット 2026', sport: 'baseball', teamA: '', teamB: '',
+      gridSize: 10, liveA: 0, liveB: 0, betAmount: 500, allowMulti: false,
+      currentUser: null, showInvestment: true, showPayout: true,
+      participants: [
+        { name: '東江', color: PC[0], bets: {}, totalBets: 0, wagered: 500, payout: 0, history: [] },
+        { name: 'ケダモト福', color: PC[1], bets: {}, totalBets: 0, wagered: 0, payout: 0, history: [] },
+        { name: '多和田', color: PC[2], bets: {}, totalBets: 0, wagered: 500, payout: 0, history: [] },
+        { name: 'しおん', color: PC[3], bets: {}, totalBets: 0, wagered: 900, payout: 0, history: [] },
+        { name: '根', color: PC[4], bets: {}, totalBets: 0, wagered: 1200, payout: 0, history: [] },
+        { name: '永山', color: PC[5], bets: {}, totalBets: 0, wagered: 300, payout: 0, history: [] },
+        { name: 'Ippei', color: PC[6], bets: {}, totalBets: 0, wagered: 200, payout: 0, history: [] },
+        { name: '麗愛', color: PC[7], bets: {}, totalBets: 0, wagered: 500, payout: 3300, history: [] },
+        { name: 'まつり', color: PC[8], bets: {}, totalBets: 0, wagered: 200, payout: 0, history: [] },
+      ]
+    };
 
-const DEF={platformName:'スポーツベット 2026',sport:'baseball',teamA:'',teamB:'',
-  gridSize:10,liveA:0,liveB:0,betAmount:500,allowMulti:false,
-  currentUser:null,showInvestment:true,showPayout:true,
-  participants:[
-    {name:'東江',color:PC[0],bets:{},totalBets:0,wagered:500,payout:0,history:[]},
-    {name:'ケダモト福',color:PC[1],bets:{},totalBets:0,wagered:0,payout:0,history:[]},
-    {name:'多和田',color:PC[2],bets:{},totalBets:0,wagered:500,payout:0,history:[]},
-    {name:'しおん',color:PC[3],bets:{},totalBets:0,wagered:900,payout:0,history:[]},
-    {name:'根',color:PC[4],bets:{},totalBets:0,wagered:1200,payout:0,history:[]},
-    {name:'永山',color:PC[5],bets:{},totalBets:0,wagered:300,payout:0,history:[]},
-    {name:'Ippei',color:PC[6],bets:{},totalBets:0,wagered:200,payout:0,history:[]},
-    {name:'麗愛',color:PC[7],bets:{},totalBets:0,wagered:500,payout:3300,history:[]},
-    {name:'まつり',color:PC[8],bets:{},totalBets:0,wagered:200,payout:0,history:[]},
-  ]};
+    let S = ls('sbp_v7') || JSON.parse(JSON.stringify(DEF));
+    ['allowMulti', 'showInvestment', 'showPayout'].forEach(k => { if (S[k] === undefined) S[k] = DEF[k]; });
+    if (!S.platformName) S.platformName = DEF.platformName;
 
-let S=ls('sbp_v7')||JSON.parse(JSON.stringify(DEF));
-['allowMulti','showInvestment','showPayout'].forEach(k=>{if(S[k]===undefined)S[k]=DEF[k];});
-if(!S.platformName)S.platformName=DEF.platformName;
+    function save() { ls('sbp_v7', S); }
 
-function save(){ls('sbp_v7',S);}
+    // ── Nav ──────────────────────────────────────────
+    function nav(id, btn) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.getElementById('panel-' + id).classList.add('active');
+      if (id === 'summary') renderSummary();
+      if (id === 'account') renderAccount();
+    }
 
-// ── Nav ──────────────────────────────────────────
-function nav(id,btn){
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');
-  if(id==='summary')renderSummary();
-  if(id==='account')renderAccount();
-}
+    // ── View flow ─────────────────────────────────────
+    function showView(id) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + id).classList.add('active');
+    }
 
-// ── View flow ─────────────────────────────────────
-function showView(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+id).classList.add('active');
-}
+    function goBack() {
+      showView('list');
+      document.getElementById('top-title').textContent = S.platformName;
+      document.getElementById('top-sub').textContent = '試合を選んでベット';
+      document.getElementById('score-badge').style.display = 'none';
+      document.getElementById('refresh-btn').style.display = 'none';
+      document.getElementById('live-dot').style.display = 'none';
+    }
 
-function goBack(){
-  showView('list');
-  document.getElementById('top-title').textContent=S.platformName;
-  document.getElementById('top-sub').textContent='試合を選んでベット';
-  document.getElementById('score-badge').style.display='none';
-  document.getElementById('refresh-btn').style.display='none';
-  document.getElementById('live-dot').style.display='none';
-}
+    function selectGame(g) {
+      S.teamA = g.tA; S.teamB = g.tB; S.liveA = g.sA; S.liveB = g.sB;
+      S.sport = g.sport || 'baseball';
+      save();
+      // topbar
+      document.getElementById('top-title').textContent = g.tA + ' vs ' + g.tB;
+      document.getElementById('top-sub').textContent = g.leagueName || '';
+      const sb = document.getElementById('score-badge'); sb.textContent = g.sA + '–' + g.sB; sb.style.display = 'block';
+      document.getElementById('refresh-btn').style.display = 'block';
+      if (g.isLive) document.getElementById('live-dot').style.display = 'inline-block';
+      // grid header + labels
+      document.getElementById('grid-title').textContent = g.tA + ' vs ' + g.tB;
+      document.getElementById('lbl-a').textContent = g.tA;
+      document.getElementById('lbl-b').textContent = g.tB;
+      document.getElementById('fin-la').textContent = g.tA;
+      document.getElementById('fin-lb').textContent = g.tB;
+      document.getElementById('bi-amount').textContent = '¥' + S.betAmount.toLocaleString();
+      document.getElementById('bi-mode').textContent = S.allowMulti ? '複数可' : '1票';
+      buildGrid(); renderMembersList(); renderUserBar();
+      showView('grid');
+    }
 
-function selectGame(g){
-  S.teamA=g.tA;S.teamB=g.tB;S.liveA=g.sA;S.liveB=g.sB;
-  S.sport=g.sport||'baseball';
-  save();
-  // topbar
-  document.getElementById('top-title').textContent=g.tA+' vs '+g.tB;
-  document.getElementById('top-sub').textContent=g.leagueName||'';
-  const sb=document.getElementById('score-badge');sb.textContent=g.sA+'–'+g.sB;sb.style.display='block';
-  document.getElementById('refresh-btn').style.display='block';
-  if(g.isLive)document.getElementById('live-dot').style.display='inline-block';
-  // grid header + labels
-  document.getElementById('grid-title').textContent=g.tA+' vs '+g.tB;
-  document.getElementById('lbl-a').textContent=g.tA;
-  document.getElementById('lbl-b').textContent=g.tB;
-  document.getElementById('fin-la').textContent=g.tA;
-  document.getElementById('fin-lb').textContent=g.tB;
-  document.getElementById('bi-amount').textContent='¥'+S.betAmount.toLocaleString();
-  document.getElementById('bi-mode').textContent=S.allowMulti?'複数可':'1票';
-  buildGrid();renderMembersList();renderUserBar();
-  showView('grid');
-}
+    // ── ESPN ──────────────────────────────────────────
+    // Auto-detect: use own API when hosted on Vercel, else fallback to CORS proxy
+    const IS_VERCEL = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.hostname.startsWith('192.') && window.location.protocol !== 'file:';
+    const API_BASE = IS_VERCEL ? '' : ''; // same origin when on Vercel
 
-// ── ESPN ──────────────────────────────────────────
-// Auto-detect: use own API when hosted on Vercel, else fallback to CORS proxy
-const IS_VERCEL = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.hostname.startsWith('192.') && window.location.protocol !== 'file:';
-const API_BASE = IS_VERCEL ? '' : ''; // same origin when on Vercel
+    async function espnFetch(sport, league) {
+      // If hosted on Vercel, use our serverless API (no CORS issues, can scrape)
+      if (IS_VERCEL) {
+        const r = await fetch(`/api/scores?sport=${sport}&league=${league}`, { signal: AbortSignal.timeout(8000) });
+        if (!r.ok) throw new Error('API error ' + r.status);
+        const data = await r.json();
+        // Our API returns {games:[...]} - convert to ESPN-like format for compatibility
+        return { events: data.games.map(g => espnGameToEvent(g)), _ourFormat: true };
+      }
+      // Local development: use CORS proxy chain
+      const url = `${ESPNB}/${sport}/${league}/scoreboard`;
+      const proxies = [
+        `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url
+      ];
+      for (const p of proxies) {
+        try {
+          const r = await fetch(p, { signal: AbortSignal.timeout(5000) });
+          if (!r.ok) continue;
+          const data = await r.json();
+          if (data?.events || data?.sports) return data;
+        } catch { }
+      }
+      throw new Error('All proxies failed');
+    }
 
-async function espnFetch(sport, league) {
-  // If hosted on Vercel, use our serverless API (no CORS issues, can scrape)
-  if (IS_VERCEL) {
-    const r = await fetch(`/api/scores?sport=${sport}&league=${league}`, {signal: AbortSignal.timeout(8000)});
-    if (!r.ok) throw new Error('API error ' + r.status);
-    const data = await r.json();
-    // Our API returns {games:[...]} - convert to ESPN-like format for compatibility
-    return { events: data.games.map(g => espnGameToEvent(g)), _ourFormat: true };
-  }
-  // Local development: use CORS proxy chain
-  const url = `${ESPNB}/${sport}/${league}/scoreboard`;
-  const proxies = [
-    `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    url
-  ];
-  for (const p of proxies) {
-    try {
-      const r = await fetch(p, {signal: AbortSignal.timeout(5000)});
-      if (!r.ok) continue;
-      const data = await r.json();
-      if (data?.events || data?.sports) return data;
-    } catch {}
-  }
-  throw new Error('All proxies failed');
-}
+    async function fetchHighSchool() {
+      if (IS_VERCEL) {
+        const r = await fetch('/api/highschool', { signal: AbortSignal.timeout(12000) });
+        if (!r.ok) throw new Error('Highschool API error');
+        return await r.json();
+      }
+      return { games: [] }; // local dev: manual only
+    }
 
-async function fetchHighSchool() {
-  if (IS_VERCEL) {
-    const r = await fetch('/api/highschool', {signal: AbortSignal.timeout(12000)});
-    if (!r.ok) throw new Error('Highschool API error');
-    return await r.json();
-  }
-  return { games: [] }; // local dev: manual only
-}
+    function espnGameToEvent(g) {
+      // Convert our normalized format back to ESPN-like for parseESPN compatibility
+      return {
+        id: g.id || Math.random().toString(36).slice(2),
+        name: g.tA + ' at ' + g.tB,
+        date: g.date || new Date().toISOString(),
+        status: { type: { state: g.isLive ? 'in' : g.isFinal ? 'post' : 'pre', description: g.status || '' } },
+        competitions: [{
+          competitors: [
+            { homeAway: 'away', score: String(g.sA), team: { displayName: g.tA_full || g.tA, shortDisplayName: g.tA } },
+            { homeAway: 'home', score: String(g.sB), team: { displayName: g.tB_full || g.tB, shortDisplayName: g.tB } },
+          ],
+          linescores: (g.periods || []).map(v => ({ value: v })),
+        }],
+        _game: g,
+      };
+    }
+    function parseESPN(data, tag, name, sport) {
+      if (!data?.events) return [];
+      return data.events.map(ev => {
+        const comp = ev.competitions[0];
+        const home = comp.competitors.find(c => c.homeAway === 'home') || comp.competitors[0];
+        const away = comp.competitors.find(c => c.homeAway === 'away') || comp.competitors[1];
+        const state = ev.status?.type?.state || '';
+        return {
+          tA: away.team.shortDisplayName || away.team.displayName || '?',
+          tB: home.team.shortDisplayName || home.team.displayName || '?',
+          sA: parseInt(away.score) || 0, sB: parseInt(home.score) || 0,
+          isLive: state === 'in', isFinal: state === 'post',
+          status: ev.status?.type?.description || '',
+          leagueTag: tag || '', leagueName: name || (data.leagues?.[0]?.name || ''),
+          sport: sport || 'baseball'
+        };
+      });
+    }
 
-function espnGameToEvent(g) {
-  // Convert our normalized format back to ESPN-like for parseESPN compatibility
-  return {
-    id: g.id || Math.random().toString(36).slice(2),
-    name: g.tA + ' at ' + g.tB,
-    date: g.date || new Date().toISOString(),
-    status: { type: { state: g.isLive ? 'in' : g.isFinal ? 'post' : 'pre', description: g.status || '' }},
-    competitions: [{
-      competitors: [
-        { homeAway: 'away', score: String(g.sA), team: { displayName: g.tA_full || g.tA, shortDisplayName: g.tA }},
-        { homeAway: 'home', score: String(g.sB), team: { displayName: g.tB_full || g.tB, shortDisplayName: g.tB }},
-      ],
-      linescores: (g.periods || []).map(v => ({ value: v })),
-    }],
-    _game: g,
-  };
-}
-function parseESPN(data,tag,name,sport){
-  if(!data?.events)return[];
-  return data.events.map(ev=>{
-    const comp=ev.competitions[0];
-    const home=comp.competitors.find(c=>c.homeAway==='home')||comp.competitors[0];
-    const away=comp.competitors.find(c=>c.homeAway==='away')||comp.competitors[1];
-    const state=ev.status?.type?.state||'';
-    return{tA:away.team.shortDisplayName||away.team.displayName||'?',
-      tB:home.team.shortDisplayName||home.team.displayName||'?',
-      sA:parseInt(away.score)||0,sB:parseInt(home.score)||0,
-      isLive:state==='in',isFinal:state==='post',
-      status:ev.status?.type?.description||'',
-      leagueTag:tag||'',leagueName:name||(data.leagues?.[0]?.name||''),
-      sport:sport||'baseball'};
-  });
-}
+    const SRCS = {
+      mlb: [{ s: 'baseball', l: 'mlb', t: '⚾ MLB', n: 'MLB' }, { s: 'baseball', l: 'college-baseball', t: '⚾ 大学野球', n: '大学野球' }],
+      soccer: [{ s: 'soccer', l: 'jpn.1', t: '⚽ J1', n: 'Jリーグ1部' }, { s: 'soccer', l: 'jpn.2', t: '⚽ J2', n: 'Jリーグ2部' }, { s: 'soccer', l: 'fifa.world', t: '⚽ W杯', n: 'FIFAワールドカップ' }, { s: 'soccer', l: 'afc.champions', t: '⚽ AFC', n: 'AFC CL' }],
+      wbc: [{ s: 'baseball', l: 'college-baseball', t: '🏆 国際', n: '国際野球' }, { s: 'baseball', l: 'mlb', t: '⚾ MLB', n: 'MLB' }],
+    };
 
-const SRCS={
-  mlb:[{s:'baseball',l:'mlb',t:'⚾ MLB',n:'MLB'},{s:'baseball',l:'college-baseball',t:'⚾ 大学野球',n:'大学野球'}],
-  soccer:[{s:'soccer',l:'jpn.1',t:'⚽ J1',n:'Jリーグ1部'},{s:'soccer',l:'jpn.2',t:'⚽ J2',n:'Jリーグ2部'},{s:'soccer',l:'fifa.world',t:'⚽ W杯',n:'FIFAワールドカップ'},{s:'soccer',l:'afc.champions',t:'⚽ AFC',n:'AFC CL'}],
-  wbc:[{s:'baseball',l:'college-baseball',t:'🏆 国際',n:'国際野球'},{s:'baseball',l:'mlb',t:'⚾ MLB',n:'MLB'}],
-};
+    const HS_SAMPLES = [
+      { tA: '沖縄尚学', tB: '帝京', sA: 3, sB: 2, leagueName: '春のセンバツ 2026', sport: 'baseball' },
+      { tA: '興南', tB: '大阪桐蔭', sA: 1, sB: 4, leagueName: '春のセンバツ 2026', sport: 'baseball' },
+      { tA: '浦和学院', tB: '智辯和歌山', sA: 5, sB: 3, leagueName: '春のセンバツ 2026', sport: 'baseball' },
+      { tA: '報徳学園', tB: '健大高崎', sA: 0, sB: 3, leagueName: '春のセンバツ 2026', sport: 'baseball' },
+    ];
 
-const HS_SAMPLES=[
-  {tA:'沖縄尚学',tB:'帝京',sA:3,sB:2,leagueName:'春のセンバツ 2026',sport:'baseball'},
-  {tA:'興南',tB:'大阪桐蔭',sA:1,sB:4,leagueName:'春のセンバツ 2026',sport:'baseball'},
-  {tA:'浦和学院',tB:'智辯和歌山',sA:5,sB:3,leagueName:'春のセンバツ 2026',sport:'baseball'},
-  {tA:'報徳学園',tB:'健大高崎',sA:0,sB:3,leagueName:'春のセンバツ 2026',sport:'baseball'},
-];
+    function setSport(key, btn) {
+      document.querySelectorAll('.stab').forEach(t => t.classList.remove('on')); btn.classList.add('on');
+      if (key === 'hs') { renderHSList(); return; }
+      loadGames(key);
+    }
 
-function setSport(key,btn){
-  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');
-  if(key==='hs'){renderHSList();return;}
-  loadGames(key);
-}
-
-async function loadGames(key){
-  const list=document.getElementById('game-list');
-  list.innerHTML='<div class="loader-row"><div class="spin"></div>取得中...</div>';
-  try{
-    const srcs=SRCS[key]||SRCS.mlb;
-    const res=await Promise.allSettled(srcs.map(x=>espnFetch(x.s,x.l)));
-    let games=[];
-    res.forEach((r,i)=>{if(r.status==='fulfilled')games=[...games,...parseESPN(r.value,srcs[i].t,srcs[i].n,key==='soccer'?'soccer':'baseball')];});
-    if(!games.length){list.innerHTML='<div class="empty">本日の試合データがありません</div>';return;}
-    games.sort((a,b)=>(b.isLive-a.isLive)||(b.isFinal-a.isFinal));
-    list.innerHTML='';
-    games.forEach(g=>{
-      const c=document.createElement('div');c.className='game-card';
-      const badge=g.isLive?`<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>`:g.isFinal?`<span class="badge-fin">✓ 終了</span>`:`<span class="badge-sch">${g.status||'予定'}</span>`;
-      c.innerHTML=`<div class="gc-league"><span class="gc-league-dot"></span>${g.leagueTag} ${g.leagueName}</div>
+    async function loadGames(key) {
+      const list = document.getElementById('game-list');
+      list.innerHTML = '<div class="loader-row"><div class="spin"></div>取得中...</div>';
+      try {
+        const srcs = SRCS[key] || SRCS.mlb;
+        const res = await Promise.allSettled(srcs.map(x => espnFetch(x.s, x.l)));
+        let games = [];
+        res.forEach((r, i) => { if (r.status === 'fulfilled') games = [...games, ...parseESPN(r.value, srcs[i].t, srcs[i].n, key === 'soccer' ? 'soccer' : 'baseball')]; });
+        if (!games.length) { list.innerHTML = '<div class="empty">本日の試合データがありません</div>'; return; }
+        games.sort((a, b) => (b.isLive - a.isLive) || (b.isFinal - a.isFinal));
+        list.innerHTML = '';
+        games.forEach(g => {
+          const c = document.createElement('div'); c.className = 'game-card';
+          const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : g.isFinal ? `<span class="badge-fin">✓ 終了</span>` : `<span class="badge-sch">${g.status || '予定'}</span>`;
+          c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>${g.leagueTag} ${g.leagueName}</div>
         <div class="gc-teams">
           <div class="gc-team">${g.tA}</div>
           <div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div>
           <div class="gc-team right">${g.tB}</div>
         </div>
         <div class="gc-footer">${badge}</div>`;
-      c.onclick=()=>selectGame(g);list.appendChild(c);
-    });
-  }catch{list.innerHTML='<div class="empty">⚠️ 取得失敗。接続を確認してください。</div>';}
-}
+          c.onclick = () => selectGame(g); list.appendChild(c);
+        });
+      } catch { list.innerHTML = '<div class="empty">⚠️ 取得失敗。接続を確認してください。</div>'; }
+    }
 
-async function renderHSList(){
-  const list=document.getElementById('game-list');
-  list.innerHTML='';
-  // Manual entry button always first
-  const btn=document.createElement('div');btn.className='hs-entry-btn';
-  btn.innerHTML='✏️　手動で試合を入力する';btn.onclick=openHSModal;list.appendChild(btn);
-  // Try to fetch live data from our scraper API
-  let apiGames = [];
-  if(IS_VERCEL){
-    list.insertAdjacentHTML('beforeend','<div class="loader-row" id="hs-loader"><div class="spin"></div>高校野球データを取得中...</div>');
-    try{
-      const data = await fetchHighSchool();
-      apiGames = data.games || [];
-      document.getElementById('hs-loader')?.remove();
-    }catch{document.getElementById('hs-loader')?.remove();}
-  }
-  const displayGames = apiGames.length > 0 ? apiGames : HS_SAMPLES;
-  const lbl=document.createElement('div');
-  lbl.style='font-size:9px;color:var(--txt3);padding:2px 2px 8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em';
-  lbl.textContent= apiGames.length > 0 ? `最新データ (${apiGames.length}試合)` : 'サンプル試合';
-  list.appendChild(lbl);
-  displayGames.forEach(g=>{
-    const c=document.createElement('div');c.className='game-card';
-    const badge=g.isLive?`<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>`:`<span class="badge-fin">✓ 終了</span>`;
-    c.innerHTML=`<div class="gc-league"><span class="gc-league-dot"></span>🏫 高校野球 · ${g.leagueName||'高校野球'}</div>
+    async function renderHSList() {
+      const list = document.getElementById('game-list');
+      list.innerHTML = '';
+      // Manual entry button always first
+      const btn = document.createElement('div'); btn.className = 'hs-entry-btn';
+      btn.innerHTML = '✏️　手動で試合を入力する'; btn.onclick = openHSModal; list.appendChild(btn);
+      // Try to fetch live data from our scraper API
+      let apiGames = [];
+      if (IS_VERCEL) {
+        list.insertAdjacentHTML('beforeend', '<div class="loader-row" id="hs-loader"><div class="spin"></div>高校野球データを取得中...</div>');
+        try {
+          const data = await fetchHighSchool();
+          apiGames = data.games || [];
+          document.getElementById('hs-loader')?.remove();
+        } catch { document.getElementById('hs-loader')?.remove(); }
+      }
+      const displayGames = apiGames.length > 0 ? apiGames : HS_SAMPLES;
+      const lbl = document.createElement('div');
+      lbl.style = 'font-size:9px;color:var(--txt3);padding:2px 2px 8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em';
+      lbl.textContent = apiGames.length > 0 ? `最新データ (${apiGames.length}試合)` : 'サンプル試合';
+      list.appendChild(lbl);
+      displayGames.forEach(g => {
+        const c = document.createElement('div'); c.className = 'game-card';
+        const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : `<span class="badge-fin">✓ 終了</span>`;
+        c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>🏫 高校野球 · ${g.leagueName || '高校野球'}</div>
       <div class="gc-teams"><div class="gc-team">${g.tA}</div><div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div><div class="gc-team right">${g.tB}</div></div>
       <div class="gc-footer">${badge}</div>`;
-    c.onclick=()=>selectGame({...g,leagueTag:'🏫 高校野球'});list.appendChild(c);
-  });
-}
+        c.onclick = () => selectGame({ ...g, leagueTag: '🏫 高校野球' }); list.appendChild(c);
+      });
+    }
 
-function openHSModal(){
-  document.getElementById('hs-modal').style.display='flex';
-  ['hs-ta','hs-tb','hs-league'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('hs-sa').value='0';document.getElementById('hs-sb').value='0';
-  document.getElementById('hs-samples').innerHTML=HS_SAMPLES.map(g=>`
+    function openHSModal() {
+      document.getElementById('hs-modal').style.display = 'flex';
+      ['hs-ta', 'hs-tb', 'hs-league'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('hs-sa').value = '0'; document.getElementById('hs-sb').value = '0';
+      document.getElementById('hs-samples').innerHTML = HS_SAMPLES.map(g => `
     <div onclick="fillHS('${g.tA}','${g.tB}',${g.sA},${g.sB},'${g.leagueName}')" style="display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border-radius:8px;background:var(--bg2);cursor:pointer;font-size:12px">
       <span><b>${g.tA}</b> ${g.sA}–${g.sB} <b>${g.tB}</b></span>
       <span style="font-size:10px;color:var(--txt2)">${g.leagueName}</span>
     </div>`).join('');
-}
-function closeHSModal(){document.getElementById('hs-modal').style.display='none';}
-function fillHS(tA,tB,sA,sB,ln){document.getElementById('hs-ta').value=tA;document.getElementById('hs-tb').value=tB;document.getElementById('hs-sa').value=sA;document.getElementById('hs-sb').value=sB;document.getElementById('hs-league').value=ln;}
-function applyHS(){
-  const tA=document.getElementById('hs-ta').value.trim(),tB=document.getElementById('hs-tb').value.trim();
-  if(!tA||!tB){showToast('チーム名を入力してください');return;}
-  closeHSModal();
-  selectGame({tA,tB,sA:parseInt(document.getElementById('hs-sa').value)||0,sB:parseInt(document.getElementById('hs-sb').value)||0,leagueName:document.getElementById('hs-league').value.trim()||'高校野球',leagueTag:'🏫 高校野球',sport:'baseball',isLive:false,isFinal:true});
-}
+    }
+    function closeHSModal() { document.getElementById('hs-modal').style.display = 'none'; }
+    function fillHS(tA, tB, sA, sB, ln) { document.getElementById('hs-ta').value = tA; document.getElementById('hs-tb').value = tB; document.getElementById('hs-sa').value = sA; document.getElementById('hs-sb').value = sB; document.getElementById('hs-league').value = ln; }
+    function applyHS() {
+      const tA = document.getElementById('hs-ta').value.trim(), tB = document.getElementById('hs-tb').value.trim();
+      if (!tA || !tB) { showToast('チーム名を入力してください'); return; }
+      closeHSModal();
+      selectGame({ tA, tB, sA: parseInt(document.getElementById('hs-sa').value) || 0, sB: parseInt(document.getElementById('hs-sb').value) || 0, leagueName: document.getElementById('hs-league').value.trim() || '高校野球', leagueTag: '🏫 高校野球', sport: 'baseball', isLive: false, isFinal: true });
+    }
 
-async function loadTodayBar(){
-  const bar=document.getElementById('today-bar');
-  try{
-    const srcs=[{s:'baseball',l:'mlb'},{s:'baseball',l:'college-baseball'},{s:'soccer',l:'jpn.1'}];
-    const res=await Promise.allSettled(srcs.map(x=>espnFetch(x.s,x.l)));
-    let games=[];res.forEach(r=>{if(r.status==='fulfilled')games=[...games,...parseESPN(r.value,'','','')];});
-    const show=[...games.filter(g=>g.isLive),...games.filter(g=>g.isFinal)].slice(0,12);
-    document.getElementById('today-loader').style.display='none';
-    if(!show.length){bar.innerHTML+='<span style="font-size:9px;color:var(--txt2)">本日なし</span>';return;}
-    show.forEach(g=>{const el=document.createElement('div');el.className='tg'+(g.isLive?' live':'');el.innerHTML=`<span class="tg-team">${g.tA}</span><span class="tg-score">${g.sA}–${g.sB}</span><span class="tg-team">${g.tB}</span>${g.isLive?'<span style="font-size:8px;color:var(--txt-danger)">●</span>':''}`;bar.appendChild(el);});
-  }catch{document.getElementById('today-loader').style.display='none';}
-}
+    async function loadTodayBar() {
+      const bar = document.getElementById('today-bar');
+      try {
+        const srcs = [{ s: 'baseball', l: 'mlb' }, { s: 'baseball', l: 'college-baseball' }, { s: 'soccer', l: 'jpn.1' }];
+        const res = await Promise.allSettled(srcs.map(x => espnFetch(x.s, x.l)));
+        let games = []; res.forEach(r => { if (r.status === 'fulfilled') games = [...games, ...parseESPN(r.value, '', '', '')]; });
+        const show = [...games.filter(g => g.isLive), ...games.filter(g => g.isFinal)].slice(0, 12);
+        document.getElementById('today-loader').style.display = 'none';
+        if (!show.length) { bar.innerHTML += '<span style="font-size:9px;color:var(--txt2)">本日なし</span>'; return; }
+        show.forEach(g => { const el = document.createElement('div'); el.className = 'tg' + (g.isLive ? ' live' : ''); el.innerHTML = `<span class="tg-team">${g.tA}</span><span class="tg-score">${g.sA}–${g.sB}</span><span class="tg-team">${g.tB}</span>${g.isLive ? '<span style="font-size:8px;color:var(--txt-danger)">●</span>' : ''}`; bar.appendChild(el); });
+      } catch { document.getElementById('today-loader').style.display = 'none'; }
+    }
 
-async function refreshScore(){
-  const btn=document.getElementById('refresh-btn');btn.textContent='…';
-  try{
-    const data=await espnFetch(S.sport==='soccer'?'soccer':'baseball',S.sport==='soccer'?'jpn.1':'mlb');
-    const games=parseESPN(data,'','','');
-    const m=games.find(g=>g.tA.includes(S.teamA)||S.teamA.includes(g.tA));
-    if(m&&m.isLive){
-      S.liveA=m.sA;S.liveB=m.sB;
-      document.getElementById('score-badge').textContent=S.liveA+'–'+S.liveB;
-      document.getElementById('live-dot').style.display='inline-block';
-      buildGrid();save();showToast('スコア更新: '+S.liveA+'–'+S.liveB);
-    }else showToast('ライブデータなし');
-  }catch{showToast('更新失敗');}
-  btn.textContent='↻';
-}
+    async function refreshScore() {
+      const btn = document.getElementById('refresh-btn'); btn.textContent = '…';
+      try {
+        const data = await espnFetch(S.sport === 'soccer' ? 'soccer' : 'baseball', S.sport === 'soccer' ? 'jpn.1' : 'mlb');
+        const games = parseESPN(data, '', '', '');
+        const m = games.find(g => g.tA.includes(S.teamA) || S.teamA.includes(g.tA));
+        if (m && m.isLive) {
+          S.liveA = m.sA; S.liveB = m.sB;
+          document.getElementById('score-badge').textContent = S.liveA + '–' + S.liveB;
+          document.getElementById('live-dot').style.display = 'inline-block';
+          buildGrid(); save(); showToast('スコア更新: ' + S.liveA + '–' + S.liveB);
+        } else showToast('ライブデータなし');
+      } catch { showToast('更新失敗'); }
+      btn.textContent = '↻';
+    }
 
-// ── Grid ─────────────────────────────────────────
-function buildGrid(){
-  const g=S.gridSize,tbl=document.getElementById('bet-grid');
-  const availW=document.querySelector('.grid-scroll').clientWidth||300;
-  const cellW=Math.max(24,Math.floor((availW-28)/(g+1)));
-  let h=`<colgroup><col style="width:22px"/>`;
-  for(let i=0;i<=g;i++)h+=`<col style="width:${cellW}px"/>`;
-  h+=`</colgroup><thead><tr><th><span style="font-size:7px;color:var(--txt2)">↓<br>→</span></th>`;
-  for(let c=0;c<=g;c++)h+=`<th>${c}</th>`;
-  h+='</tr></thead><tbody>';
-  for(let r=0;r<=g;r++){
-    h+=`<tr><td class="rh">${r}</td>`;
-    for(let c=0;c<=g;c++){
-      const key=`${r},${c}`,isHit=(r===S.liveB&&c===S.liveA),names=getCN(key),isBetMe=S.currentUser&&names.includes(S.currentUser);
-      const cls='c'+(isHit?' hit':'')+(isBetMe&&!isHit?' betme':'');
-      const chips=names.map(n=>{const isMe=S.currentUser&&n===S.currentUser;return`<div class="chip" style="border-color:${getPC(n)};color:${getPC(n)};max-width:${cellW-4}px"><span style="overflow:hidden;text-overflow:ellipsis">${n}</span>${isMe?`<span class="chip-del" onclick="removeBet(event,${r},${c})">✕</span>`:''}</div>`;}).join('');
-      h+=`<td class="${cls}" onclick="cellClick(${r},${c})" style="min-width:${cellW}px">${isHit?'<span class="hit-star">★</span>':''}<div class="chips">${chips}</div></td>`;
-    }h+='</tr>';
-  }
-  tbl.innerHTML=h+'</tbody>';
-}
-function getCN(k){return S.participants.filter(p=>p.bets[k]&&p.bets[k].length>0).map(p=>p.name);}
-function getPC(n){const p=S.participants.find(x=>x.name===n);return p?p.color:PC[0];}
+    // ── Grid ─────────────────────────────────────────
+    function buildGrid() {
+      const g = S.gridSize, tbl = document.getElementById('bet-grid');
+      const availW = document.querySelector('.grid-scroll').clientWidth || 300;
+      const cellW = Math.max(24, Math.floor((availW - 28) / (g + 1)));
+      let h = `<colgroup><col style="width:22px"/>`;
+      for (let i = 0; i <= g; i++)h += `<col style="width:${cellW}px"/>`;
+      h += `</colgroup><thead><tr><th><span style="font-size:7px;color:var(--txt2)">↓<br>→</span></th>`;
+      for (let c = 0; c <= g; c++)h += `<th>${c}</th>`;
+      h += '</tr></thead><tbody>';
+      for (let r = 0; r <= g; r++) {
+        h += `<tr><td class="rh">${r}</td>`;
+        for (let c = 0; c <= g; c++) {
+          const key = `${r},${c}`, isHit = (r === S.liveB && c === S.liveA), names = getCN(key), isBetMe = S.currentUser && names.includes(S.currentUser);
+          const cls = 'c' + (isHit ? ' hit' : '') + (isBetMe && !isHit ? ' betme' : '');
+          const chips = names.map(n => { const isMe = S.currentUser && n === S.currentUser; return `<div class="chip" style="border-color:${getPC(n)};color:${getPC(n)};max-width:${cellW - 4}px"><span style="overflow:hidden;text-overflow:ellipsis">${n}</span>${isMe ? `<span class="chip-del" onclick="removeBet(event,${r},${c})">✕</span>` : ''}</div>`; }).join('');
+          h += `<td class="${cls}" onclick="cellClick(${r},${c})" style="min-width:${cellW}px">${isHit ? '<span class="hit-star">★</span>' : ''}<div class="chips">${chips}</div></td>`;
+        } h += '</tr>';
+      }
+      tbl.innerHTML = h + '</tbody>';
+    }
+    function getCN(k) { return S.participants.filter(p => p.bets[k] && p.bets[k].length > 0).map(p => p.name); }
+    function getPC(n) { const p = S.participants.find(x => x.name === n); return p ? p.color : PC[0]; }
 
-function cellClick(r,c){
-  if(!S.currentUser){showToast('先にログインしてください');return;}
-  const p=S.participants.find(x=>x.name===S.currentUser);if(!p)return;
-  const key=`${r},${c}`;
-  if(!S.allowMulti&&p.bets[key]&&p.bets[key].length>0){showToast('このマスには既にベット済み');return;}
-  if(!p.bets[key])p.bets[key]=[];
-  p.bets[key].push(S.betAmount);p.totalBets++;p.wagered+=S.betAmount;
-  p.history.push({game:S.teamA+'vs'+S.teamB,key,amt:S.betAmount,ts:Date.now()});
-  save();buildGrid();renderMembersList();showToast(`${c}–${r} にベット ¥${S.betAmount.toLocaleString()}`);
-}
-function removeBet(e,r,c){
-  e.stopPropagation();if(!S.currentUser)return;
-  const p=S.participants.find(x=>x.name===S.currentUser);if(!p)return;
-  const key=`${r},${c}`;if(!p.bets[key]?.length)return;
-  const amt=p.bets[key].pop();if(!p.bets[key].length)delete p.bets[key];
-  p.totalBets=Math.max(0,p.totalBets-1);p.wagered=Math.max(0,p.wagered-amt);
-  save();buildGrid();renderMembersList();showToast('ベットを削除しました');
-}
-function renderMembersList(){
-  document.getElementById('mc-list').innerHTML=S.participants.map(p=>`
+    function cellClick(r, c) {
+      if (!S.currentUser) { showToast('先にログインしてください'); return; }
+      const p = S.participants.find(x => x.name === S.currentUser); if (!p) return;
+      const key = `${r},${c}`;
+      if (!S.allowMulti && p.bets[key] && p.bets[key].length > 0) { showToast('このマスには既にベット済み'); return; }
+      if (!p.bets[key]) p.bets[key] = [];
+      p.bets[key].push(S.betAmount); p.totalBets++; p.wagered += S.betAmount;
+      p.history.push({ game: S.teamA + 'vs' + S.teamB, key, amt: S.betAmount, ts: Date.now() });
+      save(); buildGrid(); renderMembersList(); showToast(`${c}–${r} にベット ¥${S.betAmount.toLocaleString()}`);
+    }
+    function removeBet(e, r, c) {
+      e.stopPropagation(); if (!S.currentUser) return;
+      const p = S.participants.find(x => x.name === S.currentUser); if (!p) return;
+      const key = `${r},${c}`; if (!p.bets[key]?.length) return;
+      const amt = p.bets[key].pop(); if (!p.bets[key].length) delete p.bets[key];
+      p.totalBets = Math.max(0, p.totalBets - 1); p.wagered = Math.max(0, p.wagered - amt);
+      save(); buildGrid(); renderMembersList(); showToast('ベットを削除しました');
+    }
+    function renderMembersList() {
+      document.getElementById('mc-list').innerHTML = S.participants.map(p => `
     <div class="mc-row">
       <div class="mc-dot" style="background:${p.color}"></div>
-      <div class="mc-name" style="color:${p.name===S.currentUser?p.color:'var(--txt)'}">${p.name}</div>
+      <div class="mc-name" style="color:${p.name === S.currentUser ? p.color : 'var(--txt)'}">${p.name}</div>
       <div class="mc-n">${p.totalBets}</div>
     </div>`).join('');
-}
-function renderUserBar(){
-  const el=document.getElementById('user-bar');
-  if(!S.currentUser){el.className='user-bar guest';el.innerHTML=`<span>⚠️ ログインしてベット</span><button class="btn sm" onclick="openLoginModal()" style="border-color:var(--txt-warn);color:var(--txt-warn);background:transparent">ログイン</button>`;}
-  else{const p=S.participants.find(x=>x.name===S.currentUser);el.className='user-bar loggedin';el.innerHTML=`<span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:${p?p.color:'#0F6E56'};display:inline-block"></span><b>${S.currentUser}</b> としてベット中</span>`;}
-}
+    }
+    function renderUserBar() {
+      const el = document.getElementById('user-bar');
+      if (!S.currentUser) { el.className = 'user-bar guest'; el.innerHTML = `<span>⚠️ ログインしてベット</span><button class="btn sm" onclick="openLoginModal()" style="border-color:var(--txt-warn);color:var(--txt-warn);background:transparent">ログイン</button>`; }
+      else { const p = S.participants.find(x => x.name === S.currentUser); el.className = 'user-bar loggedin'; el.innerHTML = `<span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:${p ? p.color : '#0F6E56'};display:inline-block"></span><b>${S.currentUser}</b> としてベット中</span>`; }
+    }
 
-// ── Auth ─────────────────────────────────────────
-function openLoginModal(){
-  document.getElementById('login-modal').style.display='flex';
-  document.getElementById('m-err').textContent='';document.getElementById('m-name').value='';document.getElementById('m-pass').value='';
-  document.getElementById('m-members').innerHTML=S.participants.map(p=>`<div class="mchip" onclick="quickFill('${p.name}')" style="border-color:${p.color};color:${p.color};background:${p.color}12">${p.name}</div>`).join('');
-  setTimeout(()=>document.getElementById('m-name').focus(),300);
-}
-function closeLoginModal(){document.getElementById('login-modal').style.display='none';}
-function quickFill(n){document.getElementById('m-name').value=n;document.getElementById('m-pass').focus();}
-function doLogin(){
-  const name=document.getElementById('m-name').value.trim(),pass=document.getElementById('m-pass').value,err=document.getElementById('m-err');
-  if(!name){err.textContent='名前を入力してください';return;}
-  if(pass!==USER_PASS){err.textContent='パスワードが間違っています';return;}
-  S.currentUser=name;
-  if(!S.participants.find(p=>p.name===name))S.participants.push({name,color:PC[S.participants.length%PC.length],bets:{},totalBets:0,wagered:0,payout:0,history:[]});
-  save();closeLoginModal();renderUserBar();renderMembersList();buildGrid();showToast(name+'でログインしました');
-}
-function logout(){S.currentUser=null;save();renderUserBar();buildGrid();renderMembersList();renderAccount();}
+    // ── Auth ─────────────────────────────────────────
+    function openLoginModal() {
+      document.getElementById('login-modal').style.display = 'flex';
+      document.getElementById('m-err').textContent = ''; document.getElementById('m-name').value = ''; document.getElementById('m-pass').value = '';
+      document.getElementById('m-members').innerHTML = S.participants.map(p => `<div class="mchip" onclick="quickFill('${p.name}')" style="border-color:${p.color};color:${p.color};background:${p.color}12">${p.name}</div>`).join('');
+      setTimeout(() => document.getElementById('m-name').focus(), 300);
+    }
+    function closeLoginModal() { document.getElementById('login-modal').style.display = 'none'; }
+    function quickFill(n) { document.getElementById('m-name').value = n; document.getElementById('m-pass').focus(); }
+    function doLogin() {
+      const name = document.getElementById('m-name').value.trim(), pass = document.getElementById('m-pass').value, err = document.getElementById('m-err');
+      if (!name) { err.textContent = '名前を入力してください'; return; }
+      if (pass !== USER_PASS) { err.textContent = 'パスワードが間違っています'; return; }
+      S.currentUser = name;
+      if (!S.participants.find(p => p.name === name)) S.participants.push({ name, color: PC[S.participants.length % PC.length], bets: {}, totalBets: 0, wagered: 0, payout: 0, history: [] });
+      save(); closeLoginModal(); renderUserBar(); renderMembersList(); buildGrid(); showToast(name + 'でログインしました');
+    }
+    function logout() { S.currentUser = null; save(); renderUserBar(); buildGrid(); renderMembersList(); renderAccount(); }
 
-// ── Admin ─────────────────────────────────────────
-function openAdminModal(){
-  document.getElementById('admin-modal').style.display='flex';
-  document.getElementById('a-err').textContent='';document.getElementById('a-pass').value='';
-  document.getElementById('a-settings').style.display='none';document.getElementById('a-auth').style.display='block';
-  setTimeout(()=>document.getElementById('a-pass').focus(),300);
-}
-function closeAdminModal(){document.getElementById('admin-modal').style.display='none';}
-function unlockAdmin(){
-  if(document.getElementById('a-pass').value!==ADMIN_PASS){document.getElementById('a-err').textContent='パスワードが間違っています';return;}
-  document.getElementById('a-auth').style.display='none';document.getElementById('a-settings').style.display='block';
-  document.getElementById('a-pname').value=S.platformName;document.getElementById('a-sport').value=S.sport;
-  document.getElementById('a-ta').value=S.teamA;document.getElementById('a-tb').value=S.teamB;
-  document.getElementById('a-sa').value=S.liveA;document.getElementById('a-sb').value=S.liveB;
-  document.getElementById('a-amt').value=S.betAmount;document.getElementById('a-grid').value=S.gridSize;
-  document.getElementById('a-multi').className='toggle'+(S.allowMulti?' on':'');
-}
-function saveAdmin(){
-  S.platformName=document.getElementById('a-pname').value.trim()||S.platformName;
-  S.sport=document.getElementById('a-sport').value;
-  S.teamA=document.getElementById('a-ta').value.trim()||S.teamA;S.teamB=document.getElementById('a-tb').value.trim()||S.teamB;
-  S.liveA=parseInt(document.getElementById('a-sa').value)||0;S.liveB=parseInt(document.getElementById('a-sb').value)||0;
-  S.betAmount=parseInt(document.getElementById('a-amt').value)||500;S.gridSize=parseInt(document.getElementById('a-grid').value)||10;
-  S.allowMulti=document.getElementById('a-multi').classList.contains('on');
-  save();closeAdminModal();
-  document.getElementById('bi-amount').textContent='¥'+S.betAmount.toLocaleString();
-  document.getElementById('bi-mode').textContent=S.allowMulti?'複数可':'1票';
-  buildGrid();showToast('設定を保存しました');
-}
+    // ── Admin ─────────────────────────────────────────
+    function openAdminModal() {
+      document.getElementById('admin-modal').style.display = 'flex';
+      document.getElementById('a-err').textContent = ''; document.getElementById('a-pass').value = '';
+      document.getElementById('a-settings').style.display = 'none'; document.getElementById('a-auth').style.display = 'block';
+      setTimeout(() => document.getElementById('a-pass').focus(), 300);
+    }
+    function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
+    function unlockAdmin() {
+      if (document.getElementById('a-pass').value !== ADMIN_PASS) { document.getElementById('a-err').textContent = 'パスワードが間違っています'; return; }
+      document.getElementById('a-auth').style.display = 'none'; document.getElementById('a-settings').style.display = 'block';
+      document.getElementById('a-pname').value = S.platformName; document.getElementById('a-sport').value = S.sport;
+      document.getElementById('a-ta').value = S.teamA; document.getElementById('a-tb').value = S.teamB;
+      document.getElementById('a-sa').value = S.liveA; document.getElementById('a-sb').value = S.liveB;
+      document.getElementById('a-amt').value = S.betAmount; document.getElementById('a-grid').value = S.gridSize;
+      document.getElementById('a-multi').className = 'toggle' + (S.allowMulti ? ' on' : '');
+    }
+    function saveAdmin() {
+      S.platformName = document.getElementById('a-pname').value.trim() || S.platformName;
+      S.sport = document.getElementById('a-sport').value;
+      S.teamA = document.getElementById('a-ta').value.trim() || S.teamA; S.teamB = document.getElementById('a-tb').value.trim() || S.teamB;
+      S.liveA = parseInt(document.getElementById('a-sa').value) || 0; S.liveB = parseInt(document.getElementById('a-sb').value) || 0;
+      S.betAmount = parseInt(document.getElementById('a-amt').value) || 500; S.gridSize = parseInt(document.getElementById('a-grid').value) || 10;
+      S.allowMulti = document.getElementById('a-multi').classList.contains('on');
+      save(); closeAdminModal();
+      document.getElementById('bi-amount').textContent = '¥' + S.betAmount.toLocaleString();
+      document.getElementById('bi-mode').textContent = S.allowMulti ? '複数可' : '1票';
+      buildGrid(); showToast('設定を保存しました');
+    }
 
-// ── Summary ───────────────────────────────────────
-function renderSummary(){
-  const tw=S.participants.reduce((s,p)=>s+p.wagered,0),tb=S.participants.reduce((s,p)=>s+p.totalBets,0);
-  document.getElementById('m1').textContent=tb;document.getElementById('m2').textContent='¥'+tw.toLocaleString();
-  document.getElementById('m3').textContent=S.participants.length;document.getElementById('m4').textContent='¥'+tw.toLocaleString();
-  document.getElementById('fin-la').textContent=S.teamA||'チームA';document.getElementById('fin-lb').textContent=S.teamB||'チームB';
-  ['d-body','t-body'].forEach(id=>{
-    let rw=0,rp=0;
-    document.getElementById(id).innerHTML=S.participants.map(p=>{const net=p.payout-p.wagered;rw+=p.wagered;rp+=p.payout;return`<tr><td><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${p.color};margin-right:3px"></span>${p.name}</td><td>¥${p.wagered.toLocaleString()}</td><td>${p.payout>0?'¥'+p.payout.toLocaleString():'—'}</td><td class="${net>=0?'pos':'neg'}">${net>=0?'+':''}¥${Math.abs(net).toLocaleString()}</td></tr>`;}).join('');
-    const pf=id==='d-body'?'d':'t',rn=rp-rw;
-    document.getElementById(pf+'-w').textContent='¥'+rw.toLocaleString();document.getElementById(pf+'-p').textContent='¥'+rp.toLocaleString();
-    document.getElementById(pf+'-n').innerHTML=`<span class="${rn>=0?'pos':'neg'}">${rn>=0?'+':''}¥${Math.abs(rn).toLocaleString()}</span>`;
-  });
-}
-function declareWinner(){
-  const a=parseInt(document.getElementById('fin-a').value),b=parseInt(document.getElementById('fin-b').value);
-  const key=`${b},${a}`,winners=S.participants.filter(p=>p.bets[key]&&p.bets[key].length>0);
-  const pool=S.participants.reduce((s,p)=>s+p.wagered,0),res=document.getElementById('win-msg');
-  if(!winners.length){res.style.color='var(--txt-danger)';res.textContent=`${a}–${b} の勝者なし。プール繰り越し。`;return;}
-  const share=Math.floor(pool/winners.length);winners.forEach(p=>p.payout=share);
-  save();renderSummary();res.style.color='var(--txt-success)';res.textContent=`勝者: ${winners.map(p=>p.name).join('、')} — 各自 ¥${share.toLocaleString()}`;
-}
+    // ── Summary ───────────────────────────────────────
+    function renderSummary() {
+      const tw = S.participants.reduce((s, p) => s + p.wagered, 0), tb = S.participants.reduce((s, p) => s + p.totalBets, 0);
+      document.getElementById('m1').textContent = tb; document.getElementById('m2').textContent = '¥' + tw.toLocaleString();
+      document.getElementById('m3').textContent = S.participants.length; document.getElementById('m4').textContent = '¥' + tw.toLocaleString();
+      document.getElementById('fin-la').textContent = S.teamA || 'チームA'; document.getElementById('fin-lb').textContent = S.teamB || 'チームB';
+      ['d-body', 't-body'].forEach(id => {
+        let rw = 0, rp = 0;
+        document.getElementById(id).innerHTML = S.participants.map(p => { const net = p.payout - p.wagered; rw += p.wagered; rp += p.payout; return `<tr><td><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${p.color};margin-right:3px"></span>${p.name}</td><td>¥${p.wagered.toLocaleString()}</td><td>${p.payout > 0 ? '¥' + p.payout.toLocaleString() : '—'}</td><td class="${net >= 0 ? 'pos' : 'neg'}">${net >= 0 ? '+' : ''}¥${Math.abs(net).toLocaleString()}</td></tr>`; }).join('');
+        const pf = id === 'd-body' ? 'd' : 't', rn = rp - rw;
+        document.getElementById(pf + '-w').textContent = '¥' + rw.toLocaleString(); document.getElementById(pf + '-p').textContent = '¥' + rp.toLocaleString();
+        document.getElementById(pf + '-n').innerHTML = `<span class="${rn >= 0 ? 'pos' : 'neg'}">${rn >= 0 ? '+' : ''}¥${Math.abs(rn).toLocaleString()}</span>`;
+      });
+    }
+    function declareWinner() {
+      const a = parseInt(document.getElementById('fin-a').value), b = parseInt(document.getElementById('fin-b').value);
+      const key = `${b},${a}`, winners = S.participants.filter(p => p.bets[key] && p.bets[key].length > 0);
+      const pool = S.participants.reduce((s, p) => s + p.wagered, 0), res = document.getElementById('win-msg');
+      if (!winners.length) { res.style.color = 'var(--txt-danger)'; res.textContent = `${a}–${b} の勝者なし。プール繰り越し。`; return; }
+      const share = Math.floor(pool / winners.length); winners.forEach(p => p.payout = share);
+      save(); renderSummary(); res.style.color = 'var(--txt-success)'; res.textContent = `勝者: ${winners.map(p => p.name).join('、')} — 各自 ¥${share.toLocaleString()}`;
+    }
 
-// ── Account ───────────────────────────────────────
-function renderAccount(){
-  const u=S.currentUser,av=document.getElementById('acct-view');
-  if(!u){av.innerHTML=`<div class="card" style="text-align:center;padding:32px 16px"><div style="font-size:40px;margin-bottom:12px">👤</div><div style="font-size:16px;font-weight:600;margin-bottom:5px">ログインしていません</div><div style="font-size:12px;color:var(--txt2);margin-bottom:18px">ニックネームとパスワードで参加</div><button class="btn pri" onclick="openLoginModal()" style="width:100%;font-size:14px;padding:12px">ログイン</button></div>`;return;}
-  const p=S.participants.find(x=>x.name===u)||{name:u,color:PC[0],wagered:0,payout:0,totalBets:0,history:[]};
-  const net=p.payout-p.wagered;
-  const PLATS=[
-    {name:S.platformName,sport:S.sport,sl:S.sport==='soccer'?'⚽ サッカー':'⚾ 野球',tA:S.teamA||'—',tB:S.teamB||'—',inv:p.wagered,pay:p.payout,active:true},
-    {name:'W杯 2026 予選',sport:'soccer',sl:'⚽ サッカー',tA:'日本代表',tB:'ドイツ代表',inv:0,pay:0,active:false},
-  ];
-  av.innerHTML=`
-    <div class="card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="avatar" style="background:${p.color}20;color:${p.color}">${u.slice(0,2)}</div><div style="flex:1"><div style="font-size:15px;font-weight:600">${u}</div><div style="font-size:11px;color:var(--txt2)">メンバー</div></div><button class="btn sm" onclick="logout()">ログアウト</button></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">ベット数</div><div style="font-size:17px;font-weight:600">${p.totalBets}</div></div><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">賭け金</div><div style="font-size:14px;font-weight:600">¥${p.wagered.toLocaleString()}</div></div><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">損益</div><div style="font-size:14px;font-weight:600;color:${net>=0?'var(--txt-success)':'var(--txt-danger)'}">${net>=0?'+':''}¥${Math.abs(net).toLocaleString()}</div></div></div></div>
-    <div class="card"><div class="sec-lbl" style="margin-bottom:8px">表示設定</div><div class="tr"><span>総投資額を表示</span><div class="toggle${S.showInvestment?' on':''}" onclick="td('showInvestment')"></div></div><div class="tr"><span>払い戻し金額を表示</span><div class="toggle${S.showPayout?' on':''}" onclick="td('showPayout')"></div></div></div>
+    // ── Account ───────────────────────────────────────
+    function renderAccount() {
+      const u = S.currentUser, av = document.getElementById('acct-view');
+      if (!u) { av.innerHTML = `<div class="card" style="text-align:center;padding:32px 16px"><div style="font-size:40px;margin-bottom:12px">👤</div><div style="font-size:16px;font-weight:600;margin-bottom:5px">ログインしていません</div><div style="font-size:12px;color:var(--txt2);margin-bottom:18px">ニックネームとパスワードで参加</div><button class="btn pri" onclick="openLoginModal()" style="width:100%;font-size:14px;padding:12px">ログイン</button></div>`; return; }
+      const p = S.participants.find(x => x.name === u) || { name: u, color: PC[0], wagered: 0, payout: 0, totalBets: 0, history: [] };
+      const net = p.payout - p.wagered;
+      const PLATS = [
+        { name: S.platformName, sport: S.sport, sl: S.sport === 'soccer' ? '⚽ サッカー' : '⚾ 野球', tA: S.teamA || '—', tB: S.teamB || '—', inv: p.wagered, pay: p.payout, active: true },
+        { name: 'W杯 2026 予選', sport: 'soccer', sl: '⚽ サッカー', tA: '日本代表', tB: 'ドイツ代表', inv: 0, pay: 0, active: false },
+      ];
+      av.innerHTML = `
+    <div class="card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="avatar" style="background:${p.color}20;color:${p.color}">${u.slice(0, 2)}</div><div style="flex:1"><div style="font-size:15px;font-weight:600">${u}</div><div style="font-size:11px;color:var(--txt2)">メンバー</div></div><button class="btn sm" onclick="logout()">ログアウト</button></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">ベット数</div><div style="font-size:17px;font-weight:600">${p.totalBets}</div></div><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">賭け金</div><div style="font-size:14px;font-weight:600">¥${p.wagered.toLocaleString()}</div></div><div class="metric" style="border:none;padding:8px 4px"><div class="m-lbl">損益</div><div style="font-size:14px;font-weight:600;color:${net >= 0 ? 'var(--txt-success)' : 'var(--txt-danger)'}">${net >= 0 ? '+' : ''}¥${Math.abs(net).toLocaleString()}</div></div></div></div>
+    <div class="card"><div class="sec-lbl" style="margin-bottom:8px">表示設定</div><div class="tr"><span>総投資額を表示</span><div class="toggle${S.showInvestment ? ' on' : ''}" onclick="td('showInvestment')"></div></div><div class="tr"><span>払い戻し金額を表示</span><div class="toggle${S.showPayout ? ' on' : ''}" onclick="td('showPayout')"></div></div></div>
     <div class="sec-lbl" style="margin-bottom:6px">参加中のプラットフォーム</div>
-    ${PLATS.map(pl=>`<div class="plat-card" style="${pl.active?'border-color:var(--border-info)':''}"><div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">${pl.name}</div><div style="font-size:10px;color:var(--txt2);margin-top:1px">${pl.tA} vs ${pl.tB}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="sport-tag ${pl.sport==='soccer'?'tag-soccer':'tag-baseball'}">${pl.sl}</span><span style="font-size:9px;color:${pl.active?'var(--txt-info)':'var(--txt2)'}">${pl.active?'参加中':'未参加'}</span></div></div>${(S.showInvestment||S.showPayout)?`<div class="pstats">${S.showInvestment?`<div class="pstat"><div class="pstat-lbl">総投資額</div><div class="pstat-val">¥${pl.inv.toLocaleString()}</div></div>`:''}${S.showPayout?`<div class="pstat"><div class="pstat-lbl">払い戻し</div><div class="pstat-val" style="color:${pl.pay>0?'var(--txt-success)':'var(--txt)'}">¥${pl.pay.toLocaleString()}</div></div>`:''}</div>`:''}</div>`).join('')}
-    <div class="card"><div class="sec-lbl" style="margin-bottom:6px">ベット履歴</div>${p.history.length===0?'<div style="font-size:11px;color:var(--txt2)">まだベットなし</div>':p.history.slice(-8).reverse().map(h=>`<div class="hrow"><span>${h.game} → ${h.key.replace(',','–')}</span><span>¥${h.amt.toLocaleString()}</span></div>`).join('')}</div>`;
-}
-function td(key){S[key]=!S[key];save();renderAccount();}
+    ${PLATS.map(pl => `<div class="plat-card" style="${pl.active ? 'border-color:var(--border-info)' : ''}"><div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">${pl.name}</div><div style="font-size:10px;color:var(--txt2);margin-top:1px">${pl.tA} vs ${pl.tB}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="sport-tag ${pl.sport === 'soccer' ? 'tag-soccer' : 'tag-baseball'}">${pl.sl}</span><span style="font-size:9px;color:${pl.active ? 'var(--txt-info)' : 'var(--txt2)'}">${pl.active ? '参加中' : '未参加'}</span></div></div>${(S.showInvestment || S.showPayout) ? `<div class="pstats">${S.showInvestment ? `<div class="pstat"><div class="pstat-lbl">総投資額</div><div class="pstat-val">¥${pl.inv.toLocaleString()}</div></div>` : ''}${S.showPayout ? `<div class="pstat"><div class="pstat-lbl">払い戻し</div><div class="pstat-val" style="color:${pl.pay > 0 ? 'var(--txt-success)' : 'var(--txt)'}">¥${pl.pay.toLocaleString()}</div></div>` : ''}</div>` : ''}</div>`).join('')}
+    <div class="card"><div class="sec-lbl" style="margin-bottom:6px">ベット履歴</div>${p.history.length === 0 ? '<div style="font-size:11px;color:var(--txt2)">まだベットなし</div>' : p.history.slice(-8).reverse().map(h => `<div class="hrow"><span>${h.game} → ${h.key.replace(',', '–')}</span><span>¥${h.amt.toLocaleString()}</span></div>`).join('')}</div>`;
+    }
+    function td(key) { S[key] = !S[key]; save(); renderAccount(); }
 
-// ── Toast ─────────────────────────────────────────
-let tt;
-function showToast(msg){const t=document.getElementById('_toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2300);}
+    // ── Toast ─────────────────────────────────────────
+    let tt;
+    function showToast(msg) { const t = document.getElementById('_toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2300); }
 
-// ── Enter ─────────────────────────────────────────
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Enter')return;
-  if(document.getElementById('login-modal').style.display!=='none')doLogin();
-  if(document.getElementById('admin-modal').style.display!=='none'&&document.getElementById('a-settings').style.display==='none')unlockAdmin();
-  if(document.getElementById('hs-modal').style.display!=='none')applyHS();
-});
+    // ── Enter ─────────────────────────────────────────
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      if (document.getElementById('login-modal').style.display !== 'none') doLogin();
+      if (document.getElementById('admin-modal').style.display !== 'none' && document.getElementById('a-settings').style.display === 'none') unlockAdmin();
+      if (document.getElementById('hs-modal').style.display !== 'none') applyHS();
+    });
 
-// ── Init ──────────────────────────────────────────
-document.getElementById('top-title').textContent=S.platformName;
-renderMembersList();renderUserBar();
-loadTodayBar();loadGames('mlb');
-</script>
+    // ── Init ──────────────────────────────────────────
+    document.getElementById('top-title').textContent = S.platformName;
+    renderMembersList(); renderUserBar();
+    loadTodayBar(); loadGames('mlb');
+  </script>
 </body>
+
 </html>
