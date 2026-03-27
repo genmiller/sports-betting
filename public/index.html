@@ -384,37 +384,58 @@
     .game-list {
       flex: 1;
       overflow-y: auto;
-      padding: 12px 12px 4px;
+      padding: 12px;
       -webkit-overflow-scrolling: touch;
-      background: var(--bg3)
+      background: var(--bg3);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-content: start
     }
 
     .game-list::-webkit-scrollbar {
       display: none
     }
 
+    .game-list-full {
+      grid-column: 1 / -1
+    }
+
     .game-card {
       background: var(--card);
       border-radius: 16px;
-      border: 1px solid var(--border);
-      padding: 14px 15px 12px;
-      margin-bottom: 10px;
+      border: 1px solid var(--glass-border);
+      padding: 12px 12px 10px;
       cursor: pointer;
       transition: all .2s;
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px)
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      min-height: 110px
     }
 
     .game-card:hover {
-      border-color: var(--border2);
-      background: var(--card2);
-      transform: translateY(-1px)
+      border-color: var(--accent);
+      background: rgba(59,130,246,.08);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59,130,246,.15)
     }
 
     .game-card:active {
       transform: translateY(0);
       border-color: var(--accent);
-      background: rgba(59, 130, 246, .08)
+      background: rgba(59,130,246,.1)
+    }
+
+    .gc-date {
+      font-size: 9px;
+      color: var(--txt3);
+      margin-top: 7px;
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      letter-spacing: .03em
     }
 
     .gc-league {
@@ -1833,9 +1854,18 @@
           isLive: state === 'in', isFinal: state === 'post',
           status: ev.status?.type?.description || '',
           leagueTag: tag || '', leagueName: name || (data.leagues?.[0]?.name || ''),
-          sport: sport || 'baseball'
+          sport: sport || 'baseball',
+          date: ev.date || comp.date || ''
         };
       });
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      try {
+        const d = new Date(iso);
+        return d.toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+      } catch { return ''; }
     }
 
     const SRCS = {
@@ -1859,40 +1889,41 @@
 
     async function loadGames(key) {
       const list = document.getElementById('game-list');
-      list.innerHTML = '<div class="loader-row"><div class="spin"></div>取得中...</div>';
+      list.innerHTML = '<div class="loader-row game-list-full"><div class="spin"></div>取得中...</div>';
       try {
         const srcs = SRCS[key] || SRCS.mlb;
         const res = await Promise.allSettled(srcs.map(x => espnFetch(x.s, x.l)));
         let games = [];
         res.forEach((r, i) => { if (r.status === 'fulfilled') games = [...games, ...parseESPN(r.value, srcs[i].t, srcs[i].n, key === 'soccer' ? 'soccer' : 'baseball')]; });
-        if (!games.length) { list.innerHTML = '<div class="empty">本日の試合データがありません</div>'; return; }
+        if (!games.length) { list.innerHTML = '<div class="empty game-list-full">本日の試合データがありません</div>'; return; }
         games.sort((a, b) => (b.isLive - a.isLive) || (b.isFinal - a.isFinal));
         list.innerHTML = '';
         games.forEach(g => {
           const c = document.createElement('div'); c.className = 'game-card';
           const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : g.isFinal ? `<span class="badge-fin">✓ 終了</span>` : `<span class="badge-sch">${g.status || '予定'}</span>`;
+          const dateStr = fmtDate(g.date);
           c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>${g.leagueTag} ${g.leagueName}</div>
         <div class="gc-teams">
           <div class="gc-team">${g.tA}</div>
           <div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div>
           <div class="gc-team right">${g.tB}</div>
         </div>
-        <div class="gc-footer">${badge}</div>`;
+        <div class="gc-footer">${badge}</div>${dateStr ? `<div class="gc-date">${dateStr}</div>` : ''}`;
           c.onclick = () => selectGame(g); list.appendChild(c);
         });
-      } catch { list.innerHTML = '<div class="empty">⚠️ 取得失敗。接続を確認してください。</div>'; }
+      } catch { list.innerHTML = '<div class="empty game-list-full">⚠️ 取得失敗。接続を確認してください。</div>'; }
     }
 
     async function renderHSList() {
       const list = document.getElementById('game-list');
       list.innerHTML = '';
       // Manual entry button always first
-      const btn = document.createElement('div'); btn.className = 'hs-entry-btn';
+      const btn = document.createElement('div'); btn.className = 'hs-entry-btn game-list-full';
       btn.innerHTML = '✏️　手動で試合を入力する'; btn.onclick = openHSModal; list.appendChild(btn);
       // Try to fetch live data from our scraper API
       let apiGames = [];
       if (IS_VERCEL) {
-        list.insertAdjacentHTML('beforeend', '<div class="loader-row" id="hs-loader"><div class="spin"></div>高校野球データを取得中...</div>');
+        list.insertAdjacentHTML('beforeend', '<div class="loader-row game-list-full" id="hs-loader"><div class="spin"></div>高校野球データを取得中...</div>');
         try {
           const data = await fetchHighSchool();
           apiGames = data.games || [];
@@ -1901,15 +1932,17 @@
       }
       const displayGames = apiGames.length > 0 ? apiGames : HS_SAMPLES;
       const lbl = document.createElement('div');
-      lbl.style = 'font-size:9px;color:var(--txt3);padding:2px 2px 8px;font-weight:700;text-transform:uppercase;letter-spacing:.07em';
+      lbl.className = 'game-list-full';
+      lbl.style = 'font-size:9px;color:var(--txt3);padding:2px 2px 4px;font-weight:700;text-transform:uppercase;letter-spacing:.07em';
       lbl.textContent = apiGames.length > 0 ? `最新データ (${apiGames.length}試合)` : 'サンプル試合';
       list.appendChild(lbl);
       displayGames.forEach(g => {
         const c = document.createElement('div'); c.className = 'game-card';
         const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : `<span class="badge-fin">✓ 終了</span>`;
+        const dateStr = g.date ? fmtDate(g.date) : '春センバツ 2026';
         c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>🏫 高校野球 · ${g.leagueName || '高校野球'}</div>
       <div class="gc-teams"><div class="gc-team">${g.tA}</div><div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div><div class="gc-team right">${g.tB}</div></div>
-      <div class="gc-footer">${badge}</div>`;
+      <div class="gc-footer">${badge}</div><div class="gc-date">${dateStr}</div>`;
         c.onclick = () => selectGame({ ...g, leagueTag: '🏫 高校野球' }); list.appendChild(c);
       });
     }
