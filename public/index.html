@@ -394,12 +394,12 @@
     .game-list {
       flex: 1;
       overflow-y: auto;
-      padding: 12px;
+      padding: 8px;
       -webkit-overflow-scrolling: touch;
       background: var(--bg3);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       align-content: start
     }
 
@@ -413,23 +413,25 @@
 
     .game-card {
       background: var(--card);
-      border-radius: 16px;
+      border-radius: 11px;
       border: 1px solid var(--glass-border);
-      padding: 12px 12px 10px;
+      padding: 7px 5px 6px;
       cursor: pointer;
       transition: all .2s;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       display: flex;
       flex-direction: column;
-      min-height: 110px
+      align-items: center;
+      min-height: 100px;
+      overflow: hidden
     }
 
     .game-card:hover {
       border-color: var(--accent);
       background: rgba(59,130,246,.08);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(59,130,246,.15)
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(59,130,246,.15)
     }
 
     .game-card:active {
@@ -438,104 +440,111 @@
       background: rgba(59,130,246,.1)
     }
 
-    .gc-date {
-      font-size: 9px;
-      color: var(--txt2);
-      margin-top: auto;
-      padding-top: 7px;
-      text-align: center;
-      letter-spacing: .03em;
-      opacity: .75
-    }
-
+    /* league pill at top of card */
     .gc-league {
-      font-size: 9px;
+      font-size: 7.5px;
       color: var(--txt3);
-      margin-bottom: 9px;
+      margin-bottom: 5px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .04em;
       display: flex;
       align-items: center;
-      gap: 5px
+      gap: 3px;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis
     }
 
     .gc-league-dot {
-      width: 4px;
-      height: 4px;
+      width: 3px;
+      height: 3px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0
     }
 
-    .gc-teams {
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .gc-team {
-      font-size: 15px;
-      font-weight: 800;
-      flex: 1;
-      line-height: 1.2;
-      color: var(--txt);
-      letter-spacing: -.2px
-    }
-
-    .gc-team.right {
-      text-align: right
-    }
-
-    .gc-vs-block {
+    /* stacked team + score layout */
+    .gc-stack {
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-shrink: 0;
-      gap: 2px
+      gap: 3px;
+      width: 100%;
+      flex: 1
     }
 
-    .gc-scores {
+    .gc-team {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--txt);
+      text-align: center;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 2px
+    }
+
+    .gc-score-row {
       display: flex;
       align-items: center;
-      gap: 6px
+      justify-content: center;
+      gap: 3px;
+      padding: 2px 0
     }
 
     .gc-score-n {
-      font-size: 26px;
+      font-size: 17px;
       font-weight: 900;
-      min-width: 30px;
-      text-align: center;
       line-height: 1;
-      letter-spacing: -1px
+      letter-spacing: -0.5px;
+      color: var(--txt)
     }
 
     .gc-sep {
-      font-size: 13px;
+      font-size: 10px;
       color: var(--txt3);
       font-weight: 500
     }
 
+    /* footer with status badge */
     .gc-footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 10px;
-      padding-top: 9px;
-      border-top: 1px solid var(--border)
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px solid var(--border);
+      width: 100%
+    }
+
+    .gc-date {
+      font-size: 7px;
+      color: var(--txt3);
+      margin-top: 3px;
+      text-align: center;
+      opacity: .7;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      padding: 0 2px
     }
 
     .badge-live {
-      font-size: 9px;
-      padding: 3px 10px;
-      border-radius: 10px;
+      font-size: 7px;
+      padding: 2px 6px;
+      border-radius: 8px;
       background: var(--bg-danger);
       color: var(--txt-danger);
       font-weight: 700;
       border: 1px solid var(--border-danger);
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
+      white-space: nowrap;
       animation: livefade 1.5s ease-in-out infinite
     }
 
@@ -547,27 +556,32 @@
       }
 
       50% {
-        box-shadow: 0 0 8px 2px var(--live-glow)
+        box-shadow: 0 0 6px 2px var(--live-glow)
       }
     }
 
     .badge-fin {
-      font-size: 9px;
-      padding: 3px 10px;
-      border-radius: 10px;
+      font-size: 7px;
+      padding: 2px 6px;
+      border-radius: 8px;
       background: var(--bg-success);
       color: var(--txt-success);
       font-weight: 700;
-      border: 1px solid var(--border-success)
+      border: 1px solid var(--border-success);
+      white-space: nowrap
     }
 
     .badge-sch {
-      font-size: 9px;
-      padding: 3px 10px;
-      border-radius: 10px;
+      font-size: 7px;
+      padding: 2px 6px;
+      border-radius: 8px;
       background: var(--card2);
       color: var(--txt2);
-      border: 1px solid var(--border)
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis
     }
 
     .hs-entry-btn {
@@ -1917,15 +1931,20 @@
         list.innerHTML = '';
         games.forEach(g => {
           const c = document.createElement('div'); c.className = 'game-card';
-          const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : g.isFinal ? `<span class="badge-fin">✓ 終了</span>` : `<span class="badge-sch">${g.status || '予定'}</span>`;
+          const badge = g.isLive
+            ? `<span class="badge-live"><span style="font-size:6px">●</span> LIVE</span>`
+            : g.isFinal ? `<span class="badge-fin">✓ 終了</span>`
+            : `<span class="badge-sch">${(g.status || '予定').slice(0,6)}</span>`;
           const dateStr = fmtDate(g.date);
-          c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>${g.leagueTag} ${g.leagueName}</div>
-        <div class="gc-teams">
-          <div class="gc-team">${g.tA}</div>
-          <div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div>
-          <div class="gc-team right">${g.tB}</div>
-        </div>
-        <div class="gc-footer">${badge}</div>${dateStr ? `<div class="gc-date">${dateStr}</div>` : ''}`;
+          const leagueText = (g.leagueTag + ' ' + g.leagueName).trim();
+          c.innerHTML =
+            `<div class="gc-league"><span class="gc-league-dot"></span>${leagueText}</div>
+            <div class="gc-stack">
+              <div class="gc-team">${g.tA}</div>
+              <div class="gc-score-row"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div>
+              <div class="gc-team">${g.tB}</div>
+            </div>
+            <div class="gc-footer">${badge}</div>${dateStr ? `<div class="gc-date">${dateStr}</div>` : ''}`;
           c.onclick = () => selectGame(g); list.appendChild(c);
         });
       } catch { list.innerHTML = '<div class="empty game-list-full">⚠️ 取得失敗。接続を確認してください。</div>'; }
@@ -1955,11 +1974,18 @@
       list.appendChild(lbl);
       displayGames.forEach(g => {
         const c = document.createElement('div'); c.className = 'game-card';
-        const badge = g.isLive ? `<span class="badge-live"><span style="font-size:7px">●</span> LIVE</span>` : `<span class="badge-fin">✓ 終了</span>`;
+        const badge = g.isLive
+          ? `<span class="badge-live"><span style="font-size:6px">●</span> LIVE</span>`
+          : `<span class="badge-fin">✓ 終了</span>`;
         const dateStr = g.date ? fmtDate(g.date) : '春センバツ 2026';
-        c.innerHTML = `<div class="gc-league"><span class="gc-league-dot"></span>🏫 高校野球 · ${g.leagueName || '高校野球'}</div>
-      <div class="gc-teams"><div class="gc-team">${g.tA}</div><div class="gc-vs-block"><div class="gc-scores"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div></div><div class="gc-team right">${g.tB}</div></div>
-      <div class="gc-footer">${badge}</div><div class="gc-date">${dateStr}</div>`;
+        c.innerHTML =
+          `<div class="gc-league"><span class="gc-league-dot"></span>🏫 ${g.leagueName || '高校野球'}</div>
+          <div class="gc-stack">
+            <div class="gc-team">${g.tA}</div>
+            <div class="gc-score-row"><span class="gc-score-n">${g.sA}</span><span class="gc-sep">–</span><span class="gc-score-n">${g.sB}</span></div>
+            <div class="gc-team">${g.tB}</div>
+          </div>
+          <div class="gc-footer">${badge}</div><div class="gc-date">${dateStr}</div>`;
         c.onclick = () => selectGame({ ...g, leagueTag: '🏫 高校野球' }); list.appendChild(c);
       });
     }
